@@ -6,11 +6,10 @@ authors = ["Jeremy Grosser"]
 maintainers = ["Jeremy Grosser <jeremy@synack.me>"]
 maintainers-logins = ["JeremyGrosser"]
 licenses = ["BSD 3-Clauses"]
-project-files = ["blink/blink.gpr"]
 tags = ["embedded", "nostd", "pico", "rp2040"]
+website = "https://github.com/JeremyGrosser/pico_examples"
 auto-gpr-with=false
-
-executables = ["pico_examples"]
+project-files = ["blink/blink.gpr"]
 
 [[depends-on]]
 pico_bsp = "^0.1.0"
