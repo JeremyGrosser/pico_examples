@@ -4,7 +4,6 @@
 --  SPDX-License-Identifier: BSD-3-Clause
 --
 with Ada.Text_IO; use Ada.Text_IO;
-with HAL; use HAL;
 with RP.ADC; use RP.ADC;
 with RP.SysTick;
 with RP.Device;
