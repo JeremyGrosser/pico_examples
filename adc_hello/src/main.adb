@@ -23,7 +23,11 @@ begin
    RP.SysTick.Enable;
    loop
       Counts := RP.ADC.Read (Channel => 0);
-      Result := (VREF / Microvolts (RP.ADC.Analog_Value'Last)) * Microvolts (Counts);
+      if Counts = 0 then
+         Result := 0;
+      else
+         Result := (VREF / Microvolts (RP.ADC.Analog_Value'Last)) * Microvolts (Counts);
+      end if;
       Put_Line ("Raw value:" & Counts'Image & "," & Result'Image & "μv");
 
       RP.Device.SysTick.Delay_Milliseconds (1000);
