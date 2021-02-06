@@ -9,7 +9,8 @@ licenses = ["BSD 3-Clauses"]
 tags = ["embedded", "nostd", "pico", "rp2040"]
 website = "https://github.com/JeremyGrosser/pico_examples"
 auto-gpr-with=false
-project-files = ["blink/blink.gpr"]
+project-files = ["blink/blink.gpr",
+                 "adc_hello/adc_hello.gpr"]
 
 [[depends-on]]
 pico_bsp = "^0.1.0"
