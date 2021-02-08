@@ -4,9 +4,8 @@
 --  SPDX-License-Identifier: BSD-3-Clause
 --
 with Ada.Text_IO; use Ada.Text_IO;
-with RP.ADC; use RP.ADC;
-with RP.SysTick;
-with RP.Device;
+with RP.Device;   use RP.Device;
+with RP.ADC;      use RP.ADC;
 with RP.Clock;
 with Pico;
 
@@ -19,12 +18,12 @@ begin
    RP.ADC.Configure (Pico.VSYS_DIV_3);
    RP.ADC.Configure (Temperature_Sensor);
 
-   RP.SysTick.Enable;
+   SysTick.Enable;
    loop
       VSYS := Read_Microvolts (Pico.VSYS_DIV_3) * 3;
       Put_Line ("Channel 0:  " & Read_Microvolts (0)'Image & "μv");
       Put_Line ("VSYS:       " & VSYS'Image & "μv");
       Put_Line ("Temperature:" & Temperature'Image & "°C");
-      RP.Device.SysTick.Delay_Milliseconds (1000);
+      SysTick.Delay_Milliseconds (1000);
    end loop;
 end Main;
