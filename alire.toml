@@ -12,7 +12,8 @@ auto-gpr-with=false
 project-files = [
     "blink/blink.gpr",
     "adc_hello/adc_hello.gpr",
-    "pwm/pwm.gpr"]
+    "pwm/pwm.gpr",
+    "pimoroni_rgb_keypad/pimoroni_rgb_keypad.gpr"]
 
 [[depends-on]]
 pico_bsp = "^0.1.0"
