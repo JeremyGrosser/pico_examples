@@ -1,6 +1,5 @@
 with HAL;        use HAL;
 with HAL.GPIO;   use HAL.GPIO;
-with RP.Device;  use RP.Device;
 with RP.GPIO;    use RP.GPIO;
 with RP.Clock;
 with Pico;
@@ -17,23 +16,25 @@ begin
    Pico.LED.Configure (Output);
    Pico.LED.Set;
 
-   SysTick.Enable;
+   for P in Pico.Pimoroni.RGB_Keypad.Pad loop
+      Pico.Pimoroni.RGB_Keypad.Set (P, 0, 0, 0, 0);
+   end loop;
+   Pico.Pimoroni.RGB_Keypad.Update;
 
    loop
       for P in Pico.Pimoroni.RGB_Keypad.Pad loop
-         Pico.Pimoroni.RGB_Keypad.Set_HSV
-           (P,
-            H          => Count,
-            S          => 255,
-            V          => 50,
-            Brightness => 5);
 
-         Pico.Pimoroni.RGB_Keypad.Update;
-
+         if Pico.Pimoroni.RGB_Keypad.Pressed (P) then
+            Pico.Pimoroni.RGB_Keypad.Set_HSV
+              (P,
+               H          => Count,
+               S          => 255,
+               V          => 50,
+               Brightness => 5);
+         end if;
          Count := Count + 1;
-
-         Pico.LED.Toggle;
-         SysTick.Delay_Milliseconds (25);
       end loop;
+      Pico.Pimoroni.RGB_Keypad.Update;
+      Pico.LED.Toggle;
    end loop;
 end Main;
