@@ -16,6 +16,7 @@ begin
    RP.GPIO.Enable;
 
    --  GP9 is connected to a normally open button that connects to GND when pressed
+   --  debouncing is an exercise left to the reader
    Pico.GP9.Configure (Input, Pull_Up);
    Pico.GP9.Set_Interrupt_Handler (Handlers.Toggle_LED'Access);
    Pico.GP9.Enable_Interrupt (Falling_Edge);
