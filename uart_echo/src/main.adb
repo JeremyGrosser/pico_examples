@@ -23,8 +23,9 @@ begin
    Pico.LED.Configure (Output);
    Pico.LED.Set;
 
+   --  I don't know if the pull up is needed, but it doesn't hurt?
    UART_TX.Configure (Output, Pull_Up, RP.GPIO.UART);
-   UART_RX.Configure (Output, Pull_Up, RP.GPIO.UART);
+   UART_RX.Configure (Input, Floating, RP.GPIO.UART);
    UART.Enable (115_200);
 
    declare
