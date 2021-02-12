@@ -10,10 +10,11 @@ tags = ["embedded", "nostd", "pico", "rp2040"]
 website = "https://github.com/JeremyGrosser/pico_examples"
 auto-gpr-with=false
 project-files = [
-    "blink/blink.gpr",
     "adc_hello/adc_hello.gpr",
-    "pwm/pwm.gpr",
+    "blink/blink.gpr",
     "pimoroni_rgb_keypad/pimoroni_rgb_keypad.gpr",
+    "pio_blink/pio_blink.gpr",
+    "pwm/pwm.gpr",
     "uart_echo/uart_echo.gpr"]
 
 [[depends-on]]
