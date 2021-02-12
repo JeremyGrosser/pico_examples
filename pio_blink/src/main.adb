@@ -10,30 +10,15 @@ with RP.Clock;
 with Pico;
 with HAL; use HAL;
 
-with System.Storage_Elements; use System.Storage_Elements;
-with System;
+with hello;
 
 --  XXX: THIS EXAMPLE DOES NOT WORK YET
 
 procedure Main is
-   --  These symbols are absolute values, not pointers, so use the 'Address
-   --  attribute as literal. There might be a better way to do this.
-   hello_pio_start : Storage_Element
-      with Import        => True,
-           Alignment     => 4,
-           External_Name => "hello_pio_start";
-   hello_pio_size  : Storage_Element
-      with Import        => True,
-           Alignment     => 4,
-           External_Name => "hello_pio_size";
-   Hello_Size : constant Natural := Natural (To_Integer (hello_pio_size'Address));
-   Hello : aliased UInt16_Array (1 .. Hello_Size / 2)
-      with Import  => True,
-           Address => hello_pio_start'Address;
 begin
    RP.Clock.Initialize (Pico.XOSC_Frequency);
 
-   --  PIO_0.Load (Hello'Access);
+   --PIO_0.Load (hello.Program_Instructions);
 
    SysTick.Enable;
    loop

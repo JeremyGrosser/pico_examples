@@ -1,0 +1,19 @@
+project pioasm is
+
+   for Languages use ("Asm_Pio");
+   for Source_Dirs use ("src");
+   for Object_Dir use "gen";
+   for Create_Missing_Dirs use "True";
+
+   package Naming is
+       for Body_Suffix ("Asm_Pio") use ".pio";
+   end Naming;
+
+   package Compiler is
+      for Driver ("Asm_Pio") use "pioasm";
+      for Leading_Required_Switches ("Asm_Pio") use ("-o", "ada");
+      for Object_File_Switches ("Asm_Pio") use ();
+      for Object_File_Suffix ("Asm_Pio") use ".ads";
+   end Compiler;
+
+end pioasm;

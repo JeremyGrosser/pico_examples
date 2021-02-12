@@ -3,3 +3,5 @@ lib/
 alire/
 alire.lock
 *.swp
+*.stderr
+*.stdout
