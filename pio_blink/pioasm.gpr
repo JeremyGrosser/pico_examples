@@ -12,7 +12,8 @@ project pioasm is
    package Compiler is
       for Driver ("Asm_Pio") use "pioasm";
       for Leading_Required_Switches ("Asm_Pio") use ("-o", "ada");
-      for Object_File_Switches ("Asm_Pio") use ();
+      for Switches ("Asm_Pio") use ("-p", "Hello");
+      for Object_File_Switches ("Asm_Pio") use ("");
       for Object_File_Suffix ("Asm_Pio") use ".ads";
    end Compiler;
 
