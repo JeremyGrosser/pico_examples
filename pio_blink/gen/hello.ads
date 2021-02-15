@@ -13,14 +13,12 @@ package Hello is
    -----------
 
    Hello_Wrap_Target : constant := 0;
-   Hello_Wrap        : constant := 3;
+   Hello_Wrap        : constant := 1;
 
    Hello_Program_Instructions : RP.PIO.Program := (
                     --  .wrap_target
-         16#e081#,  --   0: set    pindirs, 1                 
-         16#80a0#,  --   1: pull   block                      
-         16#6001#,  --   2: out    pins, 1                    
-         16#0001#); --   3: jmp    1                          
+         16#80a0#,  --   0: pull   block                      
+         16#6001#); --   1: out    pins, 1                    
                     --  .wrap
 
 end Hello;
