@@ -20,3 +20,5 @@ Ravenscar examples currently depend on an RTS that is not yet included in the GN
     ./build_rts.py --output=path/to/GNAT/2020-arm-elf/lib/gnat --build rpi-pico-sp
 
 If you get errors about `rts_sources.json`, you likely don't have the GNAT Community toolchain in your PATH.
+
+Development discussion is happening on Gitter: [https://gitter.im/ada-lang/raspberrypi-pico](https://gitter.im/ada-lang/raspberrypi-pico)
