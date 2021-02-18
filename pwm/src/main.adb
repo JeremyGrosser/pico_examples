@@ -13,7 +13,7 @@ with Pico;
 
 procedure Main is
    use type RP.PWM.Period;
-   PWM_LED : constant PWM_Point := To_PWM (Pico.LED);
+   PWM_LED : PWM_Point := To_PWM (Pico.LED);
    Duty_Cycle : Period := 0;
 begin
    RP.Clock.Initialize (Pico.XOSC_Frequency);
@@ -22,7 +22,7 @@ begin
 
    Pico.LED.Configure (Analog, Floating, RP.GPIO.PWM);
    Set_Phase_Correction (PWM_LED.Slice, True);
-   Set_Clock_Divider (PWM_LED.Slice, Clock_Divider (Frequency (SYS) / 10_000_000));
+   Set_Frequency (PWM_LED.Slice, 10_000_000);
    Set_Interval (PWM_LED.Slice, 100);
    Set_Duty_Cycle (PWM_LED, Duty_Cycle);
    Enable (PWM_LED.Slice);
