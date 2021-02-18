@@ -1,4 +1,4 @@
-with "pico_bsp_ravenscar.gpr";
+with "pico_bsp.gpr";
 
 project Ravenscar_Blink is
 

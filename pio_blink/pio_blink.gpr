@@ -1,4 +1,4 @@
-with "pico_bsp_zfp.gpr";
+with "pico_bsp.gpr";
 
 project PIO_Blink is
 
@@ -14,7 +14,7 @@ project PIO_Blink is
 
    package Linker is
       for Default_Switches ("Ada") use
-         Pico_BSP_ZFP.Linker_Switches;
+         Pico_BSP.Linker_Switches;
    end Linker;
 
 end PIO_Blink;

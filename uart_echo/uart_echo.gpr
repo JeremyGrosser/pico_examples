@@ -1,4 +1,4 @@
-with "pico_bsp_zfp.gpr";
+with "pico_bsp.gpr";
 
 project UART_Echo is
 
@@ -12,7 +12,7 @@ project UART_Echo is
 
    package Linker is
       for Default_Switches ("Ada") use
-         Pico_BSP_ZFP.Linker_Switches;
+         Pico_BSP.Linker_Switches;
    end Linker;
 
 end UART_Echo;
