@@ -2,6 +2,7 @@ obj/
 lib/
 alire/
 alire.lock
+deps/
 *.swp
 *.stderr
 *.stdout
