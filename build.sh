@@ -15,7 +15,7 @@ if [ "${DOCKER_BUILD}" == "1" ]; then
         alr -n -f pin ${crate} --use=${DEPS_PATH}/${crate}
     done
 
-    alr build
+    alr build $@
 else
-    docker run --pull always --rm -t -i -v $PWD:/build --env DOCKER_BUILD=1 synack/ada-builder:latest ./build.sh
+    docker run --pull always --rm -t -i -v $PWD:/build --env DOCKER_BUILD=1 synack/ada-builder:latest ./build.sh $@
 fi
