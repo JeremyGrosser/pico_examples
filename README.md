@@ -10,6 +10,8 @@ If you are on a x86_64 machine and have [Docker](https://www.docker.com/products
 
     ./build.sh
 
+The build script will clone the `rp2040_hal` and `pico_bsp` dependencies into the `deps/` directory. It will not automatically update these dependencies on subsequent builds. If you want the dependencies updated, you can `git pull` them manually or just delete the `deps/` directory before running build.
+
 ### The hard way
 
 You will need [GNAT Community Edition ARM ELF](https://www.adacore.com/download) and [Alire](https://alire.ada.dev/) installed to build these examples.
