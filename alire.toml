@@ -15,6 +15,7 @@ project-files = [
     "pimoroni_rgb_keypad/pimoroni_rgb_keypad.gpr",
     "pio_blink/pio_blink.gpr",
     "pwm/pwm.gpr",
+    "timer/timer.gpr",
     "uart_echo/uart_echo.gpr"]
 
 [[depends-on]]
