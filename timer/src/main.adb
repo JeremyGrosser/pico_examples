@@ -6,8 +6,8 @@
 with HAL.GPIO;   use HAL.GPIO;
 with RP.Device;  use RP.Device;
 with RP.GPIO;    use RP.GPIO;
+with RP.Timer;   use RP.Timer;
 with RP.Clock;
-with RP.Timer;
 with Pico;
 
 procedure Main is
@@ -28,5 +28,8 @@ begin
 
       Pico.LED.Toggle;
       Timer.Delay_Seconds (1);
+
+      Pico.LED.Toggle;
+      Timer.Delay_Until (Clock + Ticks_Per_Second);
    end loop;
 end Main;
