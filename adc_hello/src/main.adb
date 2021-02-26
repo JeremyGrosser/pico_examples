@@ -13,7 +13,7 @@ procedure Main is
    VSYS : Microvolts;
 begin
    RP.Clock.Initialize (Pico.XOSC_Frequency);
-   RP.Clock.Enable (RP.Clock.ADC);
+   RP.ADC.Enable;
    RP.ADC.Configure (0);
    RP.ADC.Configure (Pico.VSYS_DIV_3);
    RP.ADC.Configure (Temperature_Sensor);
