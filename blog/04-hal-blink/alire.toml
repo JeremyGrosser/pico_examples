@@ -1,0 +1,12 @@
+name = "rpsimple"
+description = "Shiny new project"
+version = "0.0.0"
+
+authors = ["Jeremy Grosser"]
+maintainers = ["Jeremy Grosser <jeremy@synack.me>"]
+maintainers-logins = ["JeremyGrosser"]
+
+executables = ["rpsimple"]
+
+[[depends-on]]  # This line was added by `alr with`
+rp2040_hal = "~0.2.1"  # This line was added by `alr with`

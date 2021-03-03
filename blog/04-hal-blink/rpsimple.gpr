@@ -1,0 +1,26 @@
+-- begin auto-gpr-with --
+--  This section was automatically added by Alire
+with "hal.gpr";
+with "rp2040_hal.gpr";
+-- end auto-gpr-with --
+--
+--  Copyright 2021 (C) Jeremy Grosser
+--
+--  SPDX-License-Identifier: BSD-3-Clause
+--
+project RPSimple is
+   for Target use "arm-eabi";
+   for Runtime ("Ada") use Project'Project_Dir & "../bb-runtimes/install/ravenscar-full-rpi-pico-mp";
+
+   for Languages use ("Ada");
+   for Source_Dirs use ("src");
+   for Object_Dir use "obj";
+   for Create_Missing_Dirs use "true";
+   for Main use ("main.adb");
+
+   package Compiler is
+       for Switches ("Ada") use
+           ("-g", "-Og");
+   end Compiler;
+
+end RPSimple;
