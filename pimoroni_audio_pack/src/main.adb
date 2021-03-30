@@ -3,26 +3,22 @@
 --
 --  SPDX-License-Identifier: BSD-3-Clause
 --
-with RP.Device;    use RP.Device;
-with RP.GPIO;      use RP.GPIO;
+with RP.GPIO; use RP.GPIO;
 with Pico.Pimoroni.Audio_Pack;
 with Pico.Audio_I2S;
 with Pico;
 
-with Simple_Synthesizer;
 with HAL.Audio;
+with Synth;
 
 procedure Main is
    Line_Out  : Pico.Audio_I2S.I2S_Device renames Pico.Pimoroni.Audio_Pack.I2S;
    Mute      : RP.GPIO.GPIO_Point renames Pico.Pimoroni.Audio_Pack.MUTE;
 
-   Synth : Simple_Synthesizer.Synthesizer
-      (Stereo    => True,
-       Amplitude => 1000);
-
-   Sample_Rate : constant HAL.Audio.Audio_Frequency := HAL.Audio.Audio_Freq_44kHz;
-   Buffer      : HAL.Audio.Audio_Buffer
-      (1 .. HAL.Audio.Audio_Frequency'Enum_Rep (Sample_Rate) / 10);
+   Buffer    : HAL.Audio.Audio_Buffer (1 .. Line_Out.Buffer_Size);
+   Sine      : Synth.Oscillator (Channels => Line_Out.Channels);
+   Frequency : Positive := 10;
+   T         : Natural := 0;
 begin
    RP.GPIO.Enable;
 
@@ -33,14 +29,28 @@ begin
    Mute.Configure (Output, Pull_Both);
    Mute.Clear;
 
-   Line_Out.Initialize (Sample_Rate);
-   Synth.Set_Frequency (Sample_Rate);
-   Synth.Set_Note_Frequency (440.0);
-   Synth.Receive (Buffer);
+   Line_Out.Initialize
+      (Frequency => HAL.Audio.Audio_Freq_44kHz,
+       Channels  => 2);
 
+   --  Generate the sine wavetable
+   Sine.Initialize (Amplitude => 0.5);
+
+   Pico.LED.Set;
    Mute.Set;
 
    loop
+      --  Every 1ms, increase the frequency by 100 Hz, keeping it in the range 10 - 2_000 Hz
+      if T mod (Synth.Sample_Rate / 1_000) = 0 then
+         Frequency := Frequency + 100;
+         Sine.Set_Frequency (Frequency);
+         if Frequency >= 2_000 then
+            Frequency := 10;
+         end if;
+      end if;
+      T := T + Buffer'Length;
+
+      Sine.Receive (Buffer);
       Line_Out.Transmit (Buffer);
    end loop;
 end Main;
