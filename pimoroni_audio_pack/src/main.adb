@@ -4,6 +4,7 @@
 --  SPDX-License-Identifier: BSD-3-Clause
 --
 with RP.GPIO; use RP.GPIO;
+with RP.Clock;
 with Pico.Pimoroni.Audio_Pack;
 with Pico.Audio_I2S;
 with Pico;
@@ -20,6 +21,7 @@ procedure Main is
    Frequency : Positive := 10;
    T         : Natural := 0;
 begin
+   RP.Clock.Initialize (Pico.XOSC_Frequency);
    RP.GPIO.Enable;
 
    Pico.LED.Configure (Output);
