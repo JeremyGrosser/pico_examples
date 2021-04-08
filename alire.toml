@@ -10,6 +10,7 @@ tags = ["embedded", "nostd", "pico", "rp2040"]
 website = "https://github.com/JeremyGrosser/pico_examples"
 auto-gpr-with=false
 project-files = [
+    "adafruit_feather_rp2040/blink_feather.gpr",
     "adc_hello/adc_hello.gpr",
     "blink/blink.gpr",
     "pimoroni_audio_pack/pimoroni_audio_pack.gpr",
