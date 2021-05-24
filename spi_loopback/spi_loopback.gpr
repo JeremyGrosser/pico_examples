@@ -10,6 +10,11 @@ project SPI_Loopback is
    for Object_Dir use "obj";
    for Create_Missing_Dirs use "True";
 
+   package Compiler is
+      --  Ensure assertions are enabled
+      for Switches ("Ada") use ("-gnata");
+   end Compiler;
+
    package Linker is
       for Default_Switches ("Ada") use
           Pico_BSP.Linker_Switches;
