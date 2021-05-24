@@ -37,10 +37,10 @@ begin
    RP.Device.Timer.Enable;
    Pico.LED.Configure (Output);
 
-   Master_MISO.Configure (Input, Floating, RP.GPIO.SPI);
-   Master_NSS.Configure (Output, Floating, RP.GPIO.SPI);
-   Master_SCK.Configure (Output, Floating, RP.GPIO.SPI);
-   Master_MOSI.Configure (Output, Floating, RP.GPIO.SPI);
+   Master_MISO.Configure (Input, Pull_Up, RP.GPIO.SPI);
+   Master_NSS.Configure (Output, Pull_Up, RP.GPIO.SPI);
+   Master_SCK.Configure (Output, Pull_Up, RP.GPIO.SPI);
+   Master_MOSI.Configure (Output, Pull_Up, RP.GPIO.SPI);
 
    Slave_MISO.Configure (Output, Floating, RP.GPIO.SPI);
    Slave_NSS.Configure (Input, Floating, RP.GPIO.SPI);
@@ -64,9 +64,9 @@ begin
       if Data_In /= Data_Out then
          Put_Line ("Receive buffer does not match transmit buffer!");
       else
-         Put_Line (Data_Out (1)'Image);
+         Put_Line (Data_In (1)'Image);
       end if;
-      RP.Device.Timer.Delay_Seconds (1);
+      RP.Device.Timer.Delay_Milliseconds (100);
       Pico.LED.Toggle;
    end loop;
 end Main;
