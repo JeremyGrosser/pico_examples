@@ -18,6 +18,7 @@ project-files = [
     "pimoroni_rgb_keypad_interrupt/pimoroni_rgb_keypad_interrupt.gpr",
     "pio_blink/pio_blink.gpr",
     "pwm/pwm.gpr",
+    "spi_loopback/spi_loopback.gpr",
     "timer/timer.gpr",
     "uart_echo/uart_echo.gpr"]
 
