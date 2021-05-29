@@ -7,6 +7,7 @@ with HAL.SPI; use HAL.SPI;
 with HAL;     use HAL;
 with RP.SPI;  use RP.SPI;
 with RP.GPIO; use RP.GPIO;
+with RP.DMA;
 with RP.Device;
 with RP.Clock;
 with Pico;
@@ -125,6 +126,42 @@ procedure Main is
       Ada.Text_IO.Put_Line ("PASS");
    end Test_Slave;
 
+   procedure Test_DMA
+      (Name          : String;
+       Master_Config : SPI_Configuration;
+       Slave_Config  : SPI_Configuration)
+   is
+      DMA_Config : constant RP.DMA.DMA_Configuration :=
+         (Increment_Read => True,
+          Trigger        => RP.DMA.SPI0_TX,
+          Data_Size      => RP.DMA.Transfer_16,
+          others         => <>);
+      TX_Channel : constant RP.DMA.DMA_Channel_Id := RP.DMA.DMA_Channel_Id'First;
+      A : SPI_Data_16b (1 .. 8) := (1, 2, 3, 4, 5, 6, 7, 8);
+      B : SPI_Data_16b (1 .. 8);
+      Status : SPI_Status;
+   begin
+      Ada.Text_IO.Put (Name & "...");
+      SPI_Master.Configure (Master_Config);
+      SPI_Slave.Configure (Slave_Config);
+      RP.DMA.Enable;
+
+      RP.DMA.Configure (TX_Channel, DMA_Config);
+      RP.DMA.Start
+         (Channel => TX_Channel,
+          From    => A'Address,
+          To      => SPI_Master.FIFO_Address,
+          Count   => A'Length);
+
+      SPI_Slave.Receive (B, Status);
+      pragma Assert (Status = Ok, "Slave receive: " & Status'Image);
+      pragma Assert (A = B, "Data mismatch: " & Status'Image);
+
+      RP.DMA.Disable (TX_Channel);
+
+      Ada.Text_IO.Put_Line ("PASS");
+   end Test_DMA;
+
 begin
    RP.Clock.Initialize (Pico.XOSC_Frequency);
    RP.Device.Timer.Enable;
@@ -201,6 +238,18 @@ begin
       Transfer_Length => 8);
 
    Test_Slave ("Slave transmit",
+      Master_Config =>
+        (Role      => Master,
+         Baud      => 10_000_000,
+         Data_Size => Data_Size_16b,
+         others    => <>),
+      Slave_Config =>
+        (Role      => Slave,
+         Baud      => 10_000_000,
+         Data_Size => Data_Size_16b,
+         others    => <>));
+
+   Test_DMA ("DMA transmit",
       Master_Config =>
         (Role      => Master,
          Baud      => 10_000_000,
