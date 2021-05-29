@@ -12,12 +12,28 @@ project SPI_Loopback is
 
    package Compiler is
       --  Ensure assertions are enabled
-      for Switches ("Ada") use ("-gnata");
+      for Switches ("Ada") use
+          ("-Og",
+           "-g",
+           "-gnatwa",       --  All warnings
+           "-gnatwl",       --  Elaboration warnings
+           "-gnatVa",       --  Validity checks
+           "-gnatyg",       --  Style checks
+           "-gnatyM120",    --  Line length
+           "-gnatyO",       --  Overriding subprograms must be explicitly marked
+           "-gnata",        --  Assertions
+           "-gnatQ",        --  Keep going after errors
+           "-gnatw.X",      --  Hide No_Exception_Propagation warnings
+           "-gnatwB",       --  Hide Warn_On_Bad_Fixed_Value
+           "-fstack-usage", --  Output stack usage information
+           "-ffunction-sections",
+           "-fdata-sections");
    end Compiler;
 
    package Linker is
       for Default_Switches ("Ada") use
-          Pico_BSP.Linker_Switches;
+          Pico_BSP.Linker_Switches &
+          ("-Wl,--print-memory-usage,--gc-sections");
    end Linker;
 
 end SPI_Loopback;
