@@ -34,8 +34,8 @@ begin
       --  Each PWM slice has two output channels. Only one is connected to the
       --  GPIO here, so setting the duty cycle of the other has no effect.
       Set_Duty_Cycle (PWM_LED,
-         Clocks_A => Duty_Cycle,
-         Clocks_B => Duty_Cycle);
+         Channel_A => Duty_Cycle,
+         Channel_B => Duty_Cycle);
 
       RP.Device.Timer.Delay_Milliseconds (10);
       Duty_Cycle := (Duty_Cycle + 10) mod Reload;
