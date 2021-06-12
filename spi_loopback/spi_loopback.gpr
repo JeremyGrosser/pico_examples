@@ -32,8 +32,8 @@ project SPI_Loopback is
 
    package Linker is
       for Default_Switches ("Ada") use
-          Pico_BSP.Linker_Switches &
-          ("-Wl,--print-memory-usage,--gc-sections");
+          Pico_BSP.Linker_Switches;
+--          ("-Wl,--print-memory-usage,--gc-sections");
    end Linker;
 
 end SPI_Loopback;
