@@ -43,6 +43,10 @@ begin
 
    loop
       RP.Device.RTC.Get (Time, Date);
+
+      --  Printing over semihosting I/O is slow enough that we occasionally
+      --  lose a second. If you're using this for anything important, consider
+      --  using a UART for output instead.
       Ada.Text_IO.Put_Line
          (Text_Format.To_String (Time, Date));
 
