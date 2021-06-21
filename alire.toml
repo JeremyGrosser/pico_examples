@@ -22,7 +22,8 @@ project-files = [
     "rtc/rtc.gpr",
     "spi_loopback/spi_loopback.gpr",
     "timer/timer.gpr",
-    "uart_echo/uart_echo.gpr"]
+    "uart_echo/uart_echo.gpr",
+    "usb/usb_cdc_acm.gpr"]
 
 [[depends-on]]
 pico_bsp = "~0.4"
