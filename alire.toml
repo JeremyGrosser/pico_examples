@@ -13,6 +13,7 @@ project-files = [
     "adafruit_feather_rp2040/blink_feather.gpr",
     "adc_hello/adc_hello.gpr",
     "blink/blink.gpr",
+    "gpio_interrupts/gpio_interrupts.gpr",
     "pimoroni_audio_pack/pimoroni_audio_pack.gpr",
     "pimoroni_rgb_keypad/pimoroni_rgb_keypad.gpr",
     "pimoroni_rgb_keypad_interrupt/pimoroni_rgb_keypad_interrupt.gpr",

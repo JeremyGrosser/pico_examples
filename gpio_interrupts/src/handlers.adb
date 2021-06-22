@@ -2,8 +2,10 @@ with Pico;
 
 package body Handlers is
    procedure Toggle_LED
-      (Trigger : Interrupt_Triggers)
+      (Pin     : GPIO_Pin;
+       Trigger : Interrupt_Triggers)
    is
+      pragma Unreferenced (Pin);
       pragma Unreferenced (Trigger);
    begin
       Pico.LED.Toggle;
