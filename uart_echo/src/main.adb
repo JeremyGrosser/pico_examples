@@ -73,6 +73,6 @@ begin
           others    => <>));
 
    Send_Hello;
-   UART.Send_Break (RP.Device.Timer'Access);
+   UART.Send_Break (RP.Device.Timer'Access, UART.Frame_Time * 2);
    Echo;
 end Main;
