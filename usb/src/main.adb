@@ -7,7 +7,7 @@ with RP.Device;
 with RP.Clock;
 with RP.GPIO;
 with Pico;
-with USB_CDC_ACM;
+with Interrupts;
 
 procedure Main is
 begin
@@ -15,7 +15,7 @@ begin
    Pico.LED.Configure (RP.GPIO.Output);
    RP.Device.Timer.Enable;
 
-   RP.Device.USB.Initialize;
+   RP.Device.UDC.Initialize;
 
    loop
       Pico.LED.Toggle;
