@@ -1,6 +1,6 @@
 name = "pico_examples"
 description = "Examples for Ada on the Raspberry Pi Pico"
-version = "0.4.0"
+version = "0.5.0"
 
 authors = ["Jeremy Grosser"]
 maintainers = ["Jeremy Grosser <jeremy@synack.me>"]
@@ -25,4 +25,4 @@ project-files = [
     "uart_echo/uart_echo.gpr"]
 
 [[depends-on]]
-pico_bsp = "~0.4"
+pico_bsp = "~0.5"
