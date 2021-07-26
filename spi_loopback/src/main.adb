@@ -94,6 +94,7 @@ begin
         (Role      => Slave,
          Baud      => 10_000_000,
          Data_Size => HAL.SPI.Data_Size_16b,
+         Blocking  => False,
          others    => <>));
 
    Tests.Test_DMA ("DMA transmit",
