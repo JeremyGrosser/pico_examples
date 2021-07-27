@@ -1,3 +1,8 @@
+--
+--  Copyright 2021 (C) Jeremy Grosser <jeremy@synack.me>
+--
+--  SPDX-License-Identifier: BSD-3-Clause
+--
 with Pico.Pimoroni.RGB_Keypad; use Pico.Pimoroni.RGB_Keypad;
 
 package body Demo is
