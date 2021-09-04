@@ -23,6 +23,11 @@ package Tests is
        Master_Config : SPI_Configuration;
        Slave_Config  : SPI_Configuration);
 
+   procedure Test_Slave_8
+      (Name          : String;
+       Master_Config : SPI_Configuration;
+       Slave_Config  : SPI_Configuration);
+
    procedure Test_DMA
       (Name          : String;
        Master_Config : SPI_Configuration;

@@ -97,6 +97,19 @@ begin
          Blocking  => False,
          others    => <>));
 
+   Tests.Test_Slave_8 ("Slave 8 transmit",
+      Master_Config =>
+        (Role      => Master,
+         Baud      => 10_000_000,
+         Data_Size => HAL.SPI.Data_Size_8b,
+         others    => <>),
+      Slave_Config =>
+        (Role      => Slave,
+         Baud      => 10_000_000,
+         Data_Size => HAL.SPI.Data_Size_8b,
+         Blocking  => False,
+         others    => <>));
+
    Tests.Test_DMA ("DMA transmit",
       Master_Config =>
         (Role      => Master,
