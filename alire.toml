@@ -22,7 +22,13 @@ project-files = [
     "rtc/rtc.gpr",
     "spi_loopback/spi_loopback.gpr",
     "timer/timer.gpr",
-    "uart_echo/uart_echo.gpr"]
+    "uart_echo/uart_echo.gpr",
+    "usb_echo/usb_echo.gpr"]
 
 [[depends-on]]
 pico_bsp = "~0.6"
+usb_embedded = "~0.1.0"
+
+[[pins]]
+rp2040_hal = { url='https://github.com/JeremyGrosser/rp2040_hal' }
+usb_embedded = { url='https://github.com/Fabien-Chouteau/usb_embedded' }
