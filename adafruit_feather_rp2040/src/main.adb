@@ -10,7 +10,7 @@ with RP.GPIO;
 
 procedure Main is
 begin
-   RP.Clock.Initialize (XOSC_Frequency);
+   RP.Clock.Initialize (XOSC_Frequency, XOSC_Startup_Delay);
    LED.Configure (RP.GPIO.Output);
    RP.Device.Timer.Enable;
    loop

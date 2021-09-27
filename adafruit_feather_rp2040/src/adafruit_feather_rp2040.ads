@@ -38,7 +38,10 @@ package Adafruit_Feather_RP2040 is
    NEOPIXEL : aliased GPIO_Point := (Pin => 16);
 
 
-   XOSC_Frequency : RP.Clock.XOSC_Hertz := 12_000_000;
+   XOSC_Frequency     : RP.Clock.XOSC_Hertz  := 12_000_000;
+   XOSC_Startup_Delay : RP.Clock.XOSC_Cycles := 768_000;
+   --  Some boards need to wait a bit longer for the crystal oscillator to
+   --  stabilize. This value changes the delay from the default 1ms to 64ms.
 
    LED  : GPIO_Point renames D13;
    SPI  : RP.SPI.SPI_Port renames RP.Device.SPI_0;
