@@ -31,4 +31,3 @@ usb_embedded = "~0.1.0"
 
 [[pins]]
 rp2040_hal = { url='https://github.com/JeremyGrosser/rp2040_hal' }
-usb_embedded = { url='https://github.com/JeremyGrosser/usb_embedded#blocking_start' }
