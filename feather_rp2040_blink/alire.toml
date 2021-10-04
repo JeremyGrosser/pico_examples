@@ -1,0 +1,15 @@
+name = "feather_rp2040_blink"
+description = "Blink example with a custom BSP"
+version = "0.7.0"
+
+authors = ["Jeremy Grosser"]
+maintainers = ["Jeremy Grosser <jeremy@synack.me>"]
+maintainers-logins = ["JeremyGrosser"]
+
+executables = ["feather_rp2040_blink"]
+
+[[depends-on]]
+feather_rp2040_bsp = "~0.7.0"
+
+[[pins]]
+feather_rp2040_bsp = { path='../feather_rp2040_bsp' }

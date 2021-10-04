@@ -1,6 +1,6 @@
 name = "pico_examples"
 description = "Examples for Ada on the Raspberry Pi Pico"
-version = "0.6.0"
+version = "0.7.0"
 
 authors = ["Jeremy Grosser"]
 maintainers = ["Jeremy Grosser <jeremy@synack.me>"]
@@ -10,7 +10,6 @@ tags = ["embedded", "nostd", "pico", "rp2040"]
 website = "https://github.com/JeremyGrosser/pico_examples"
 auto-gpr-with=false
 project-files = [
-    "adafruit_feather_rp2040/blink_feather.gpr",
     "adc_hello/adc_hello.gpr",
     "blink/blink.gpr",
     "gpio_interrupts/gpio_interrupts.gpr",
@@ -26,8 +25,8 @@ project-files = [
     "usb_echo/usb_echo.gpr"]
 
 [[depends-on]]
-pico_bsp = "~0.6"
+pico_bsp = "~0.7"
 usb_embedded = "~0.1.0"
 
 [[pins]]
-rp2040_hal = { url='https://github.com/JeremyGrosser/rp2040_hal' }
+pico_bsp = { url='https://github.com/JeremyGrosser/pico_bsp' }

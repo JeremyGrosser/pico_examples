@@ -3,7 +3,7 @@
 --
 --  SPDX-License-Identifier: BSD-3-Clause
 --
-with Adafruit_Feather_RP2040; use Adafruit_Feather_RP2040;
+with Feather_RP2040; use Feather_RP2040;
 with RP.Device;
 with RP.Clock;
 with RP.GPIO;

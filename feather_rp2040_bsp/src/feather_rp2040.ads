@@ -10,7 +10,7 @@ with RP.Clock;
 with RP.UART;
 with RP.SPI;
 
-package Adafruit_Feather_RP2040 is
+package Feather_RP2040 is
 
    A0   : aliased GPIO_Point := (Pin => 26);
    A1   : aliased GPIO_Point := (Pin => 27);
@@ -48,4 +48,4 @@ package Adafruit_Feather_RP2040 is
    I2C  : RP.I2C_Master.I2C_Master_Port renames RP.Device.I2C_1;
    UART : RP.UART.UART_Port renames RP.Device.UART_0;
 
-end Adafruit_Feather_RP2040;
+end Feather_RP2040;
