@@ -1,0 +1,24 @@
+with "pico_bsp.gpr";
+
+project ADC_Continuous is
+
+   for Runtime ("Ada") use "zfp-cortex-m0p";
+   for Target use "arm-eabi";
+   for Main use ("main.adb");
+   for Languages use ("Ada");
+   for Source_Dirs use ("src");
+   for Object_Dir use "obj";
+   for Create_Missing_Dirs use "True";
+
+   package Compiler is
+      for Switches ("Ada") use
+         ("-O0",
+          "-g");
+   end Compiler;
+
+   package Linker is
+      for Default_Switches ("Ada") use
+         Pico_BSP.Linker_Switches;
+   end Linker;
+
+end ADC_Continuous;

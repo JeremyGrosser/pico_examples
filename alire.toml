@@ -10,6 +10,7 @@ tags = ["embedded", "nostd", "pico", "rp2040"]
 website = "https://github.com/JeremyGrosser/pico_examples"
 auto-gpr-with=false
 project-files = [
+    "adc_continuous/adc_continuous.gpr",
     "adc_hello/adc_hello.gpr",
     "blink/blink.gpr",
     "gpio_interrupts/gpio_interrupts.gpr",
