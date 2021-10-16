@@ -31,3 +31,4 @@ usb_embedded = "~0.1.0"
 
 [[pins]]
 pico_bsp = { url='https://github.com/JeremyGrosser/pico_bsp' }
+rp2040_hal = { url='https://github.com/JeremyGrosser/rp2040_hal' }
