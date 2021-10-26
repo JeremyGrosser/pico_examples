@@ -33,7 +33,7 @@ begin
 
    Pico.LED.Configure (RP.GPIO.Output);
 
-   RP.Device.RTC.Initialize;
+   RP.Device.RTC.Configure;
    RP.Device.RTC.Set (Time, Date);
 
    --  Wait a couple seconds after setting the time to ensure it reads back
