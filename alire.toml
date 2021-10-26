@@ -27,7 +27,3 @@ project-files = [
 
 [[depends-on]]
 pico_bsp = "~0.7"
-
-[[pins]]
-pico_bsp = { url='https://github.com/JeremyGrosser/pico_bsp' }
-rp2040_hal = { url='https://github.com/JeremyGrosser/rp2040_hal' }
