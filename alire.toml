@@ -27,7 +27,6 @@ project-files = [
 
 [[depends-on]]
 pico_bsp = "~0.7"
-usb_embedded = "~0.1.0"
 
 [[pins]]
 pico_bsp = { url='https://github.com/JeremyGrosser/pico_bsp' }
