@@ -7,7 +7,7 @@ maintainers = ["Jeremy Grosser <jeremy@synack.me>"]
 maintainers-logins = ["JeremyGrosser"]
 licenses = "BSD-3-Clause"
 tags = ["embedded", "nostd", "pico", "rp2040"]
-website = "https://github.com/JeremyGrosser/pico_examples"
+website = "https://pico-doc.synack.me/"
 auto-gpr-with=false
 project-files = [
     "adc_continuous/adc_continuous.gpr",
