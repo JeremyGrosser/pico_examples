@@ -4,6 +4,8 @@
 --  SPDX-License-Identifier: BSD-3-Clause
 --
 with RP.ROM.Floating_Point;
+with Interfaces.C;
+with Interfaces;
 
 package body Synth is
 
@@ -11,8 +13,9 @@ package body Synth is
       (This      : in out Oscillator;
        Amplitude : Float := 1.0)
    is
-      use RP.ROM.Floating_Point;
-      use Interfaces;
+      --  Wrap fsin to convert to and from C_float
+      function Sin (F : Float) return Float is
+         (Float (RP.ROM.Floating_Point.fsin (Interfaces.C.C_float (F))));
 
       Pi        : constant := 3.14159;  --  probably enough digits
       W         : constant := 2.0 * Pi; --  angular velocity
@@ -20,16 +23,16 @@ package body Synth is
       Period    : Float;                --  time per sample (seconds)
       F         : Float;
    begin
-      Gain := fmul (Float (Integer_16'Last), Amplitude);
-      Period := fdiv (1.0, int2float (This.Wave'Length));
+      Gain := Float (Interfaces.Integer_16'Last) * Amplitude;
+      Period := 1.0 / Float (This.Wave'Length);
       for T in This.Wave'Range loop
          --  F := Sin (2.0 * Pi * T * (1.0 / Sample_Rate));
-         F := int2float (T);
-         F := fmul (Period, F);
-         F := fmul (W, F);
-         F := fsin (F);
-         F := fmul (F, Gain);
-         This.Wave (T) := Integer_16 (F);
+         F := Float (T);
+         F := F * Period;
+         F := F * W;
+         F := Sin (F);
+         F := F * Gain;
+         This.Wave (T) := Interfaces.Integer_16 (F);
       end loop;
    end Initialize;
 
