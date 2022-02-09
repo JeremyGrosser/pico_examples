@@ -28,3 +28,5 @@ project-files = [
 
 [[depends-on]]
 pico_bsp = "^1"
+[[pins]]  # Added by alr
+rp2040_hal = { url='https://github.com/JeremyGrosser/rp2040_hal' }   # Added by alr
