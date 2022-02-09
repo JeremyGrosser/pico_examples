@@ -4,6 +4,7 @@
 --  SPDX-License-Identifier: BSD-3-Clause
 --
 with RP.GPIO; use RP.GPIO;
+with RP.PIO.WS2812;
 with RP.I2C_Master;
 with RP.Device;
 with RP.Clock;
@@ -35,8 +36,12 @@ package Feather_RP2040 is
    SCL  : aliased GPIO_Point := (Pin => 3);
    SDA  : aliased GPIO_Point := (Pin => 2);
 
-   NEOPIXEL : aliased GPIO_Point := (Pin => 16);
-
+   Neopixel_Pin : aliased GPIO_Point := (Pin => 16);
+   Neopixel     : aliased RP.PIO.WS2812.Strip
+      (Pin => Neopixel_Pin'Access,
+       PIO => RP.Device.PIO_0'Access,
+       SM  => 0,
+       Number_Of_LEDs => 1);
 
    XOSC_Frequency     : RP.Clock.XOSC_Hertz  := 12_000_000;
    XOSC_Startup_Delay : RP.Clock.XOSC_Cycles := 768_000;

@@ -9,7 +9,9 @@ maintainers-logins = ["JeremyGrosser"]
 executables = ["feather_rp2040_blink"]
 
 [[depends-on]]
-feather_rp2040_bsp = "~0.7.0"
+feather_rp2040_bsp = "^1"
 
 [[pins]]
 feather_rp2040_bsp = { path='../feather_rp2040_bsp' }
+[[pins]]  # Added by alr
+rp2040_hal = { url='https://github.com/JeremyGrosser/rp2040_hal' }   # Added by alr
