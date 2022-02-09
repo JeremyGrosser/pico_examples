@@ -6,14 +6,14 @@
 with RP.GPIO; use RP.GPIO;
 with RP.Clock;
 with Pico.Pimoroni.Audio_Pack;
-with Pico.Audio_I2S;
+with RP.PIO.Audio_I2S;
 with Pico;
 
 with HAL.Audio;
 with Synth;
 
 procedure Main is
-   Line_Out  : Pico.Audio_I2S.I2S_Device renames Pico.Pimoroni.Audio_Pack.I2S;
+   Line_Out  : RP.PIO.Audio_I2S.I2S_Device renames Pico.Pimoroni.Audio_Pack.I2S;
    Mute      : RP.GPIO.GPIO_Point renames Pico.Pimoroni.Audio_Pack.MUTE;
 
    Buffer    : HAL.Audio.Audio_Buffer (1 .. Line_Out.Buffer_Size);
