@@ -17,6 +17,7 @@ project-files = [
     "pimoroni_audio_pack/pimoroni_audio_pack.gpr",
     "pimoroni_rgb_keypad/pimoroni_rgb_keypad.gpr",
     "pimoroni_rgb_keypad_interrupt/pimoroni_rgb_keypad_interrupt.gpr",
+    "pio_assemble/pio_assemble.gpr",
     "pio_blink/pio_blink.gpr",
     "pwm/pwm.gpr",
     "rtc/rtc.gpr",
