@@ -15,7 +15,7 @@ package body Synth is
    is
       --  Wrap fsin to convert to and from C_float
       function Sin (F : Float) return Float is
-         (Float (RP.ROM.Floating_Point.fsin (Interfaces.C.C_float (F))));
+         (Float (RP.ROM.Floating_Point.fsin (F)));
 
       Pi        : constant := 3.14159;  --  probably enough digits
       W         : constant := 2.0 * Pi; --  angular velocity
