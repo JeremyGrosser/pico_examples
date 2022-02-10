@@ -21,8 +21,8 @@ procedure Main is
        Number_Of_LEDs => 300);
 
    Hue         : UInt8 := 0;
-   Saturation  : UInt8 := 1;
-   Value       : UInt8 := 1;
+   Saturation  : UInt8 := 255;
+   Value       : UInt8 := 32;
 begin
    RP.Clock.Initialize (Pico.XOSC_Frequency);
    Pico.LED.Configure (RP.GPIO.Output);
