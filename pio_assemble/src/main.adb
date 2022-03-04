@@ -28,8 +28,8 @@ begin
    Set_Out_Pins (Config, Pico.LED.Pin, 1);
    Set_Set_Pins (Config, Pico.LED.Pin, 1);
    Set_Wrap (Config,
-      Wrap_Target => 0,
-      Wrap        => Blink_Program'Length);
+      Wrap_Target => Program_Offset,
+      Wrap        => Program_Offset + Blink_Program'Length);
    Set_Clock_Frequency (Config, 50_000_000);
 
    P.SM_Initialize (SM,
