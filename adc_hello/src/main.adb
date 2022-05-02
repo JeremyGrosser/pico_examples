@@ -27,7 +27,7 @@ begin
    RP.ADC.Configure (0);
    RP.ADC.Configure (Pico.VSYS_DIV_3);
 
-   SysTick.Enable;
+   RP.Device.Timer.Enable;
    loop
       Pico.SMPS_PS.Set;
       VSYS := RP.ADC.Read_Microvolts (Pico.VSYS_DIV_3) * 3;
@@ -35,6 +35,6 @@ begin
       Put_Line ("VSYS:       " & VSYS'Image & "μv");
       Put_Line ("Temperature:" & RP.ADC.Temperature'Image & "°C");
       Pico.SMPS_PS.Clear;
-      SysTick.Delay_Milliseconds (1000);
+      RP.Device.Timer.Delay_Milliseconds (1000);
    end loop;
 end Main;
