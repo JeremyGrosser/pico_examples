@@ -14,6 +14,7 @@ project-files = [
     "adc_hello/adc_hello.gpr",
     "blink/blink.gpr",
     "gpio_interrupts/gpio_interrupts.gpr",
+    "i2c_demo/i2c_demo.gpr",
     "multicore/multicore.gpr",
     "pimoroni_audio_pack/pimoroni_audio_pack.gpr",
     "pimoroni_rgb_keypad/pimoroni_rgb_keypad.gpr",
