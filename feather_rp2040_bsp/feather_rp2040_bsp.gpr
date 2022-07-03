@@ -2,7 +2,7 @@ with "rp2040_hal.gpr";
 
 project Feather_Rp2040_Bsp is
 
-   for Runtime ("Ada") use "zfp-cortex-m0p";
+   for Runtime ("Ada") use "light-cortex-m0p";
    for Target use "arm-eabi";
 
    Linker_Switches := RP2040_HAL.Linker_Switches;

@@ -3,7 +3,7 @@ with "chests.gpr";
 
 project UART_Interrupt is
 
-   for Runtime ("Ada") use "zfp-cortex-m0p";
+   for Runtime ("Ada") use "light-cortex-m0p";
    for Target use "arm-eabi";
    for Main use ("main.adb");
    for Languages use ("Ada");

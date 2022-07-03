@@ -3,7 +3,7 @@ with "feather_rp2040_bsp.gpr";
 
 project Feather_Rp2040_Blink is
 
-   for Runtime ("Ada") use "zfp-cortex-m0p";
+   for Runtime ("Ada") use "light-cortex-m0p";
    for Target use "arm-eabi";
 
    package Linker is

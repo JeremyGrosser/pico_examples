@@ -2,7 +2,7 @@ with "pico_bsp.gpr";
 
 project Multicore is
 
-   for Runtime ("Ada") use "zfp-cortex-m0p";
+   for Runtime ("Ada") use "light-cortex-m0p";
    for Target use "arm-eabi";
    for Main use ("main.adb");
    for Languages use ("Ada");
