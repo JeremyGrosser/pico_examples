@@ -35,10 +35,11 @@ procedure I2C_Demo is
    --  Read the chip ID register from a BME280/BMP280 sensor using the low level RP.I2C interface
    procedure Read_Id is
       use type RP.Timer.Time;
+      use type RP.I2C.I2C_Status;
       Port     : aliased RP.I2C.I2C_Port (0, RP2040_SVD.I2C.I2C0_Periph'Access);
       Timing   : constant RP.I2C.I2C_Timing := (RP.I2C.Standard_Mode with delta Rise => 452, Fall => 10);
       Deadline : constant RP.Timer.Time := RP.Timer.Clock + RP.Timer.Milliseconds (100);
-      Status   : I2C_Status;
+      Status   : RP.I2C.I2C_Status;
       Chip_Id  : UInt8;
    begin
       Port.Configure ((Role => RP.I2C.Controller, Timing => Timing));
@@ -56,14 +57,14 @@ procedure I2C_Demo is
 
       Port.Start_Write (1, Stop => False, Deadline => Deadline);
       Port.Write (REG_CHIP_ID, Status, Deadline => Deadline);
-      if Status /= Ok then
+      if Status /= RP.I2C.Ok then
          Put_Line ("Write register address error");
          return;
       end if;
 
       Port.Start_Read (1);
       Port.Read (Chip_Id, Status, Deadline => Deadline);
-      if Status /= Ok then
+      if Status /= RP.I2C.Ok then
          Put_Line ("Read chip id error");
          return;
       end if;
@@ -76,9 +77,10 @@ procedure I2C_Demo is
 
    --  Now with the high level HAL.I2C interface
    procedure Read_Id_HAL is
+      use type HAL.I2C.I2C_Status;
       Port   : aliased RP.I2C_Master.I2C_Master_Port (0, RP2040_SVD.I2C.I2C0_Periph'Access);
       Data   : I2C_Data (1 .. 1);
-      Status : I2C_Status;
+      Status : HAL.I2C.I2C_Status;
    begin
       Port.Configure
          (Baudrate     => 100_000,
@@ -90,7 +92,7 @@ procedure I2C_Demo is
           Data          => Data,
           Status        => Status,
           Timeout       => 1000);
-      if Status /= Ok then
+      if Status /= HAL.I2C.Ok then
          Put_Line ("Read chip id error (HAL)");
          return;
       end if;
