@@ -25,9 +25,6 @@ procedure Main is
    use type USB.Device.Init_Result;
    Status  : USB.Device.Init_Result;
 
-   Hello_Message : constant String := "Hello, Pico!";
-   Hello_Count   : Natural := 0;
-
    Message    : String (1 .. Max_Packet_Size);
    Length     : HAL.UInt32;
 begin
