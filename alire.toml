@@ -28,6 +28,7 @@ project-files = [
     "uart_echo/uart_echo.gpr",
     "uart_interrupt/uart_interrupt.gpr",
     "usb_echo/usb_echo.gpr",
+    "usb_echo_interrupt/usb_echo_interrupt.gpr",
     "ws2812_demo/ws2812_demo.gpr"]
 
 [[depends-on]]
