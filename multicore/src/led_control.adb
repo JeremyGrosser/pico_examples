@@ -7,6 +7,7 @@ with System.Storage_Elements; use System.Storage_Elements;
 with RP2040_SVD.PPB;
 with RP.Multicore.FIFO;
 with RP.Multicore;
+with RP.Device;
 with RP.Timer;
 with RP.Clock;
 with RP.GPIO;
@@ -42,13 +43,12 @@ package body LED_Control is
 
    procedure Run_Core0 is
       use RP.Timer;
-      D : Delays;
       T : Time := Clock;
    begin
-      D.Enable;
+      RP.Device.Timer.Enable;
       loop
          T := T + Milliseconds (1_000);
-         D.Delay_Until (T);
+         RP.Device.Timer.Delay_Until (T);
          RP.Multicore.FIFO.Push_Blocking (3);
       end loop;
    end Run_Core0;

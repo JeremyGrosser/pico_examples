@@ -36,9 +36,7 @@ package body Console is
           Prio   => RP_Interrupts.Interrupt_Priority'First);
    end Configure;
 
-   procedure Interrupt
-      (Id : RP_Interrupts.Interrupt_ID)
-   is
+   procedure Interrupt is
       Data   : HAL.UART.UART_Data_8b (1 .. 1);
       Status : HAL.UART.UART_Status;
       Ch     : Character;

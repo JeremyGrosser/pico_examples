@@ -23,7 +23,7 @@ package body USB_Int is
 
    USB_Stack : USB.Device.USB_Device_Stack (Max_Classes => 1);
 
-   procedure USB_Int_Handler (Unused : RP_Interrupts.Interrupt_ID) is
+   procedure USB_Int_Handler is
    begin
 
       --  Interrupt based USB device only requiers to call the stack Poll

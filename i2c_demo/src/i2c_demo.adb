@@ -1,5 +1,6 @@
 with RP.GPIO; use RP.GPIO;
 with RP.Clock;
+with RP.Device;
 with RP.Timer;
 
 with RP2040_SVD.I2C;
@@ -27,7 +28,6 @@ with Ada.Text_IO; use Ada.Text_IO;
 procedure I2C_Demo is
    SDA    : GPIO_Point := (Pin => 0);
    SCL    : GPIO_Point := (Pin => 1);
-   Delays : RP.Timer.Delays;
 
    Addr   : constant UInt7 := 2#1110110#;
    REG_CHIP_ID : constant UInt8 := 16#D0#;
@@ -105,10 +105,10 @@ begin
    SDA.Configure (Output, Pull_Up, RP.GPIO.I2C, Schmitt => True);
    SCL.Configure (Output, Pull_Up, RP.GPIO.I2C, Schmitt => True);
 
-   Delays.Enable;
+   RP.Device.Timer.Enable;
    loop
       Read_Id;
       Read_Id_HAL;
-      Delays.Delay_Milliseconds (100);
+      RP.Device.Timer.Delay_Milliseconds (100);
    end loop;
 end I2C_Demo;

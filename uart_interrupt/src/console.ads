@@ -12,7 +12,6 @@ package Console is
 
 private
 
-    procedure Interrupt
-        (Id : RP_Interrupts.Interrupt_ID);
+    procedure Interrupt;
 
 end Console;
