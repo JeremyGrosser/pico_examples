@@ -1,6 +1,6 @@
 name = "pico_examples"
 description = "Examples for Ada on the Raspberry Pi Pico"
-version = "2.0.0-alpha"
+version = "2.0.0"
 
 authors = ["Jeremy Grosser"]
 maintainers = ["Jeremy Grosser <jeremy@synack.me>"]
@@ -36,5 +36,3 @@ gnat_arm_elf = "^12"
 rp2040_hal = "^2.0"
 pico_bsp = "^2.0"
 chests = "~0.1.1"
-[[pins]]
-pico_bsp = { url='https://github.com/JeremyGrosser/pico_bsp' }
