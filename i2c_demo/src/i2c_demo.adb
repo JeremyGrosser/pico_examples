@@ -29,7 +29,12 @@ procedure I2C_Demo is
    SDA    : GPIO_Point := (Pin => 0);
    SCL    : GPIO_Point := (Pin => 1);
 
-   Addr   : constant UInt7 := 2#1110110#;
+   -- The HAL.I2C address is shifted to the left compared to the RP.I2C address.
+   -- This is because the HAL.I2C driver itself shifts the provided address to the right.
+   -- Due to this behavior the address must be declared as 8 bit.
+   Addr     : constant UInt7 := 2#1110110#;
+   Addr_HAL : constant UInt8 := 2#11101100#;
+
    REG_CHIP_ID : constant UInt8 := 16#D0#;
 
    --  Read the chip ID register from a BME280/BMP280 sensor using the low level RP.I2C interface
@@ -86,7 +91,7 @@ procedure I2C_Demo is
          (Baudrate     => 100_000,
           Address_Size => RP.I2C_Master.Address_Size_7b);
       Port.Mem_Read
-         (Addr          => I2C_Address (Addr),
+         (Addr          => I2C_Address (Addr_HAL),
           Mem_Addr      => UInt16 (REG_CHIP_ID),
           Mem_Addr_Size => Memory_Size_8b,
           Data          => Data,
