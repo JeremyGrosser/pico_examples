@@ -29,9 +29,9 @@ procedure I2C_Demo is
    SDA    : GPIO_Point := (Pin => 0);
    SCL    : GPIO_Point := (Pin => 1);
 
-   -- The HAL.I2C address is shifted to the left compared to the RP.I2C address.
-   -- This is because the HAL.I2C driver itself shifts the provided address to the right.
-   -- Due to this behavior the address must be declared as 8 bit.
+   --  The HAL.I2C address is shifted to the left compared to the RP.I2C address.
+   --  This is because the HAL.I2C driver itself shifts the provided address to the right.
+   --  Due to this behavior the address must be declared as 8 bit.
    Addr     : constant UInt7 := 2#1110110#;
    Addr_HAL : constant UInt8 := 2#11101100#;
 
