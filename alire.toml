@@ -19,7 +19,6 @@ project-files = [
     "multicore/multicore.gpr",
     "pimoroni_audio_pack/pimoroni_audio_pack.gpr",
     "pimoroni_rgb_keypad/pimoroni_rgb_keypad.gpr",
-    "pimoroni_rgb_keypad_interrupt/pimoroni_rgb_keypad_interrupt.gpr",
     "pio_assemble/pio_assemble.gpr",
     "pio_blink/pio_blink.gpr",
     "pwm/pwm.gpr",
@@ -37,4 +36,3 @@ gnat_arm_elf = "^12"
 rp2040_hal = "^2.0"
 pico_bsp = "^2.0"
 chests = "~0.1.1"
-
