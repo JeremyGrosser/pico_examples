@@ -43,7 +43,13 @@ procedure Main is
             when Err_Timeout =>
                raise Test_Error with "Unexpected Err_Timeout with timeout disabled!";
             when Busy =>
-               raise Test_Error with "Unexpected Busy status in UART receive";
+               --  Busy indicates a Break condition- RX held low for a full
+               --  word time. This may be detected unintentionally if a
+               --  transmitter is not connected. Break is used by some
+               --  protocols (eg. LIN bus) to indicate the end of a frame.
+               --
+               --  For this example, we just ignore it.
+               null;
             when Ok =>
                UART.Transmit (Buffer, Status);
                if Status /= Ok then
