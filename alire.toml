@@ -33,6 +33,6 @@ project-files = [
 
 [[depends-on]]
 gnat_arm_elf = "^12"
-rp2040_hal = "^2.0"
-pico_bsp = "^2.0"
+rp2040_hal = "^2"
+pico_bsp = "^2"
 chests = "~0.1.1"
