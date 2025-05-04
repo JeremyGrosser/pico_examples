@@ -19,7 +19,7 @@ procedure I2C_Demo is
 
    --  Read the chip ID register from a BME280/BMP280
    procedure Read_Id_HAL is
-      Port   : aliased RP.I2C_Master.I2C_Master_Port (0);
+      Port   : RP.I2C_Master.I2C_Master_Port renames RP.Device.I2CM_0;
       Data   : I2C_Data (1 .. 1);
       Status : HAL.I2C.I2C_Status;
    begin
