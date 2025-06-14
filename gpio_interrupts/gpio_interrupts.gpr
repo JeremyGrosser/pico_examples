@@ -1,20 +1,31 @@
+with "config/gpio_interrupts_config.gpr";
 with "pico_bsp.gpr";
 
-project GPIO_Interrupts is
+project gpio_interrupts is
 
-   for Runtime ("Ada") use "light-cortex-m0p";
    for Target use "arm-eabi";
-   for Main use ("main.adb");
-   for Languages use ("Ada");
-   for Source_Dirs use ("src");
-   for Object_Dir use "obj";
-   for Create_Missing_Dirs use "True";
-
-   package Compiler renames Pico_BSP.Compiler;
+   for Runtime ("Ada") use "light-cortex-m0p";
 
    package Linker is
-      for Default_Switches ("Ada") use
-         Pico_BSP.Linker_Switches;
+      for Switches ("Ada") use pico_bsp.linker_switches;
    end Linker;
 
-end GPIO_Interrupts;
+   for Source_Dirs use ("src/", "config/");
+   for Object_Dir use "obj/" & gpio_interrupts_Config.Build_Profile;
+   for Create_Missing_Dirs use "True";
+   for Exec_Dir use "bin";
+   for Main use ("gpio_interrupts.adb");
+
+   package Compiler is
+      for Default_Switches ("Ada") use gpio_interrupts_Config.Ada_Compiler_Switches;
+   end Compiler;
+
+   package Binder is
+      for Switches ("Ada") use ("-Es"); --  Symbolic traceback
+   end Binder;
+
+   package Install is
+      for Artifacts (".") use ("share");
+   end Install;
+
+end gpio_interrupts;

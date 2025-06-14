@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "gdb with OpenOCD",
+            "type": "gdb",
+            "request": "launch",
+            "target": "${workspaceFolder}/bin/pimoroni_rgb_keypad",
+            "gdbpath": "${userHome}/.local/share/alire/toolchains/gnat_arm_elf_14.2.1_524d4d41/bin/arm-eabi-gdb",
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "autorun": [
+                "target extended-remote localhost:3333",
+                "monitor arm semihosting enable"
+            ]
+        }
+    ]
+}
