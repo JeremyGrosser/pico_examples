@@ -1,0 +1,20 @@
+{
+  "configurations": {
+    "gdb_pimoroni_rgb_keypad": {
+      "adapter": "vscode-cpptools",
+      "configuration": {
+        "request": "launch",
+        "program": "${workspaceRoot}/bin/pimoroni_rgb_keypad",
+        "miDebuggerServerAddress": "localhost:3333",
+        "args": [],
+        "stopAtEntry": true,
+        "cwd": "${workspaceRoot}",
+        "environment": [],
+        "externalConsole": true,
+        "MIMode": "gdb",
+        "miDebuggerPath": "arm-eabi-gdb",
+        "setupCommands": []
+      }
+    }
+  }
+}

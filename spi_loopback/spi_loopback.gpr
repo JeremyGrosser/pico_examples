@@ -1,39 +1,31 @@
+with "config/spi_loopback_config.gpr";
 with "pico_bsp.gpr";
 
-project SPI_Loopback is
+project spi_loopback is
 
-   for Runtime ("Ada") use "light-cortex-m0p";
    for Target use "arm-eabi";
-   for Main use ("main.adb");
-   for Languages use ("Ada");
-   for Source_Dirs use ("src");
-   for Object_Dir use "obj";
-   for Create_Missing_Dirs use "True";
-
-   package Compiler is
-      --  Ensure assertions are enabled
-      for Switches ("Ada") use
-          ("-Og",
-           "-g",
-           "-gnatwa",       --  All warnings
-           "-gnatwl",       --  Elaboration warnings
-           "-gnatVa",       --  Validity checks
-           "-gnatyg",       --  Style checks
-           "-gnatyM120",    --  Line length
-           "-gnatyO",       --  Overriding subprograms must be explicitly marked
-           "-gnata",        --  Assertions
-           "-gnatQ",        --  Keep going after errors
-           "-gnatw.X",      --  Hide No_Exception_Propagation warnings
-           "-gnatwB",       --  Hide Warn_On_Bad_Fixed_Value
-           "-fstack-usage", --  Output stack usage information
-           "-ffunction-sections",
-           "-fdata-sections");
-   end Compiler;
+   for Runtime ("Ada") use "light-cortex-m0p";
 
    package Linker is
-      for Default_Switches ("Ada") use
-          Pico_BSP.Linker_Switches;
---          ("-Wl,--print-memory-usage,--gc-sections");
+      for Switches ("Ada") use pico_bsp.linker_switches;
    end Linker;
 
-end SPI_Loopback;
+   for Source_Dirs use ("src/", "config/");
+   for Object_Dir use "obj/" & spi_loopback_Config.Build_Profile;
+   for Create_Missing_Dirs use "True";
+   for Exec_Dir use "bin";
+   for Main use ("spi_loopback.adb");
+
+   package Compiler is
+      for Default_Switches ("Ada") use spi_loopback_Config.Ada_Compiler_Switches;
+   end Compiler;
+
+   package Binder is
+      for Switches ("Ada") use ("-Es"); --  Symbolic traceback
+   end Binder;
+
+   package Install is
+      for Artifacts (".") use ("share");
+   end Install;
+
+end spi_loopback;
