@@ -1,0 +1,20 @@
+{
+  "configurations": {
+    "gdb_timer": {
+      "adapter": "vscode-cpptools",
+      "configuration": {
+        "request": "launch",
+        "program": "${workspaceRoot}/bin/timer",
+        "miDebuggerServerAddress": "localhost:3333",
+        "args": [],
+        "stopAtEntry": true,
+        "cwd": "${workspaceRoot}",
+        "environment": [],
+        "externalConsole": true,
+        "MIMode": "gdb",
+        "miDebuggerPath": "arm-eabi-gdb",
+        "setupCommands": []
+      }
+    }
+  }
+}

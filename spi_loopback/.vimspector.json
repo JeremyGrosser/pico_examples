@@ -1,0 +1,20 @@
+{
+  "configurations": {
+    "gdb_spi_loopback": {
+      "adapter": "vscode-cpptools",
+      "configuration": {
+        "request": "launch",
+        "program": "${workspaceRoot}/bin/spi_loopback",
+        "miDebuggerServerAddress": "localhost:3333",
+        "args": [],
+        "stopAtEntry": true,
+        "cwd": "${workspaceRoot}",
+        "environment": [],
+        "externalConsole": true,
+        "MIMode": "gdb",
+        "miDebuggerPath": "arm-eabi-gdb",
+        "setupCommands": []
+      }
+    }
+  }
+}

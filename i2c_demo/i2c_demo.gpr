@@ -1,21 +1,23 @@
-with "../config/pico_examples_config.gpr";
+with "config/i2c_demo_config.gpr";
 with "pico_bsp.gpr";
 
-project I2c_Demo is
+project i2c_demo is
 
    for Target use "arm-eabi";
    for Runtime ("Ada") use "light-cortex-m0p";
 
-   for Source_Dirs use ("src/");
-   for Object_Dir use "obj/" & Pico_Examples_Config.Build_Profile;
+   package Linker is
+      for Switches ("Ada") use pico_bsp.linker_switches;
+   end Linker;
+
+   for Source_Dirs use ("src/", "config/");
+   for Object_Dir use "obj/" & i2c_demo_Config.Build_Profile;
    for Create_Missing_Dirs use "True";
    for Exec_Dir use "bin";
    for Main use ("i2c_demo.adb");
 
    package Compiler is
-      for Default_Switches ("Ada") use Pico_Examples_Config.Ada_Compiler_Switches &
-         ("-gnatyM120",
-          "-gnat2022");
+      for Default_Switches ("Ada") use i2c_demo_Config.Ada_Compiler_Switches;
    end Compiler;
 
    package Binder is
@@ -26,8 +28,4 @@ project I2c_Demo is
       for Artifacts (".") use ("share");
    end Install;
 
-   package Linker is
-      for Switches ("Ada") use Pico_BSP.Linker_Switches;
-   end Linker;
-
-end I2c_Demo;
+end i2c_demo;

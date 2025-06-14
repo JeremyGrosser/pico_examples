@@ -1,0 +1,15 @@
+name = "pio_blink"
+description = "hello_world_ada_pico"
+version = "0.1.0-dev"
+
+authors = ["Jeremy Grosser"]
+maintainers = ["Jeremy Grosser <jeremy@synack.me>"]
+maintainers-logins = ["JeremyGrosser"]
+licenses = "MIT OR Apache-2.0 WITH LLVM-exception"
+website = ""
+tags = []
+
+executables = ["pio_blink"]
+
+[[depends-on]]
+pico_bsp = "^2.0.0"

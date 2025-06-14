@@ -1,0 +1,20 @@
+{
+  "configurations": {
+    "gdb_uart_interrupt": {
+      "adapter": "vscode-cpptools",
+      "configuration": {
+        "request": "launch",
+        "program": "${workspaceRoot}/bin/uart_interrupt",
+        "miDebuggerServerAddress": "localhost:3333",
+        "args": [],
+        "stopAtEntry": true,
+        "cwd": "${workspaceRoot}",
+        "environment": [],
+        "externalConsole": true,
+        "MIMode": "gdb",
+        "miDebuggerPath": "arm-eabi-gdb",
+        "setupCommands": []
+      }
+    }
+  }
+}
