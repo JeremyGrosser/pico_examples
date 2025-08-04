@@ -1,7 +1,6 @@
 with RP.GPIO; use RP.GPIO;
 with RP.Clock;
 with RP.Device;
-with RP.Timer;
 
 with RP.I2C_Master;
 with HAL; use HAL;
@@ -24,8 +23,7 @@ procedure I2C_Demo is
       Status : HAL.I2C.I2C_Status;
    begin
       Port.Configure
-         (Baudrate     => 100_000,
-          Address_Size => RP.I2C_Master.Address_Size_7b);
+         (Baudrate => 100_000);
       Port.Mem_Read
          (Addr          => Addr_HAL,
           Mem_Addr      => UInt16 (REG_CHIP_ID),
