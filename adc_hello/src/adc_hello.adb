@@ -31,9 +31,9 @@ begin
    loop
       Pico.SMPS_PS.Set;
       VSYS := RP.ADC.Read_Microvolts (Pico.VSYS_DIV_3) * 3;
-      Put_Line ("Channel 0:  " & RP.ADC.Read_Microvolts (0)'Image & "μv");
-      Put_Line ("VSYS:       " & VSYS'Image & "μv");
-      Put_Line ("Temperature:" & RP.ADC.Temperature'Image & "°C");
+      Put_Line ("Channel 0:  " & RP.ADC.Read_Microvolts (0)'Image & " uv");
+      Put_Line ("VSYS:       " & VSYS'Image & " uv");
+      Put_Line ("Temperature:" & RP.ADC.Temperature'Image & " C");
       Pico.SMPS_PS.Clear;
       RP.Device.Timer.Delay_Milliseconds (1000);
    end loop;

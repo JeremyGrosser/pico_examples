@@ -13,7 +13,7 @@ procedure I2C_Target is
    Addr : constant HAL.UInt7 := 2#1110110#;
 
    subtype Sensor_Id is HAL.UInt8 range 1 .. 4;
-   Data    : array (Sensor_Id) of HAL.UInt8;
+   Data    : constant array (Sensor_Id) of HAL.UInt8 := (others => 42);
    Request : HAL.UInt8;
 
    use type RP.I2C.I2C_Status;

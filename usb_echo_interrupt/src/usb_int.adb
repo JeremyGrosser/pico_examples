@@ -3,7 +3,7 @@
 --
 --  SPDX-License-Identifier: BSD-3-Clause
 --
-
+pragma Style_Checks ("M120");
 with RP_Interrupts;
 with Cortex_M.NVIC;
 

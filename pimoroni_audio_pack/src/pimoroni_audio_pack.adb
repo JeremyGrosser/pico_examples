@@ -3,6 +3,7 @@
 --
 --  SPDX-License-Identifier: BSD-3-Clause
 --
+pragma Style_Checks ("M120");
 with RP.GPIO; use RP.GPIO;
 with RP.Clock;
 with Pico.Pimoroni.Audio_Pack;
@@ -22,7 +23,6 @@ procedure Pimoroni_audio_pack is
    T         : Natural := 0;
 begin
    RP.Clock.Initialize (Pico.XOSC_Frequency);
-   RP.GPIO.Enable;
 
    Pico.LED.Configure (Output);
    Pico.LED.Clear;

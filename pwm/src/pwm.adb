@@ -43,7 +43,7 @@ begin
       Set_Duty_Cycle (GP0.Slice, GP0.Channel, Duty_Cycle);
       Set_Duty_Cycle (LED.Slice, LED.Channel, Duty_Cycle);
 
-      -- Increase the duty cycle by 1% every 10ms
+      --  Increase the duty cycle by 1% every 10ms
       Duty_Cycle := (Duty_Cycle + (Reload / 100)) mod Reload;
 
       T := T + Milliseconds (10);

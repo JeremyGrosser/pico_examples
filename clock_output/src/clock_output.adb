@@ -9,7 +9,7 @@ with RP.Clock; use RP.Clock;
 with RP.GPIO;  use RP.GPIO;
 with Pico;
 
-procedure Main is
+procedure Clock_Output is
 begin
    RP.Clock.Initialize (Pico.XOSC_Frequency);
    Pico.LED.Configure (Output);
@@ -23,4 +23,4 @@ begin
    loop
       null;
    end loop;
-end Main;
+end Clock_Output;

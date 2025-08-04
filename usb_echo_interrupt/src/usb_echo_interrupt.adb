@@ -27,7 +27,8 @@ begin
       if USB_Int.USB_Serial.List_Ctrl_State.DTE_Is_Present then
          USB_Int.USB_Serial.Read (Message, Length);
          if Length > 0 then
-            USB_Int.USB_Serial.Write (RP.Device.UDC, Message (1 .. Natural (Length)), Length);
+            USB_Int.USB_Serial.Write
+               (RP.Device.UDC, Message (1 .. Natural (Length)), Length);
          end if;
       end if;
    end loop;

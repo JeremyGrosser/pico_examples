@@ -10,7 +10,7 @@ with RP.Clock;
 with RP.GPIO;
 with RP.DMA;
 
-procedure Main is
+procedure Feather_RP2040_Blink is
    H : UInt8 := UInt8'Last;
    S : constant UInt8 := UInt8'Last;
    V : constant UInt8 := 10;
@@ -32,4 +32,4 @@ begin
       Neopixel.Update;
       RP.Device.Timer.Delay_Milliseconds (5);
    end loop;
-end Main;
+end Feather_RP2040_Blink;

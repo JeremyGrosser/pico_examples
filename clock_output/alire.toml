@@ -1,15 +1,15 @@
-name = "blink"
-description = "hello_world_ada_pico"
+name = "clock_output"
+description = ""
 version = "0.1.0-dev"
 
 authors = ["Jeremy Grosser"]
 maintainers = ["Jeremy Grosser <jeremy@synack.me>"]
 maintainers-logins = ["JeremyGrosser"]
-licenses = "MIT OR Apache-2.0 WITH LLVM-exception"
+licenses = "BSD-3-Clause"
 website = ""
 tags = []
 
-executables = ["blink"]
+executables = ["clock_output"]
 
 [[depends-on]]
 pico_bsp = "^2"

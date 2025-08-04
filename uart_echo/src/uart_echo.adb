@@ -3,7 +3,7 @@
 --
 --  SPDX-License-Identifier: BSD-3-Clause
 --
-with HAL.GPIO;   use HAL.GPIO;
+pragma Style_Checks ("M120");
 with HAL.UART;   use HAL.UART;
 with RP.Device;  use RP.Device;
 with RP.GPIO;    use RP.GPIO;

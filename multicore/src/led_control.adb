@@ -3,6 +3,7 @@
 --
 --  SPDX-License-Identifier: BSD-3-Clause
 --
+pragma Style_Checks ("M120");
 with System.Storage_Elements; use System.Storage_Elements;
 with RP2040_SVD.PPB;
 with RP.Multicore.FIFO;

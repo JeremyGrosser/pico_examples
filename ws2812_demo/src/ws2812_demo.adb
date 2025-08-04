@@ -21,8 +21,8 @@ procedure Ws2812_demo is
        Number_Of_LEDs => 300);
 
    Hue         : UInt8 := 0;
-   Saturation  : UInt8 := 255;
-   Value       : UInt8 := 32;
+   Saturation  : constant UInt8 := 255;
+   Value       : constant UInt8 := 32;
 begin
    RP.Clock.Initialize (Pico.XOSC_Frequency);
    Pico.LED.Configure (RP.GPIO.Output);

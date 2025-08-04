@@ -16,6 +16,18 @@ package body Console is
 
    UART : aliased RP.UART.UART_Port (0, RP2040_SVD.UART.UART0_Periph'Access);
 
+   procedure Interrupt is
+      Data   : HAL.UART.UART_Data_8b (1 .. 1);
+      Status : HAL.UART.UART_Status;
+      Ch     : Character;
+   begin
+      if not Character_Buffers.Is_Full (Buffer) then
+         UART.Receive (Data, Status, Timeout => 0);
+         Ch := Character'Val (Natural (Data (1)));
+         Character_Buffers.Append (Buffer, Ch);
+      end if;
+   end Interrupt;
+
    procedure Configure is
       use RP.UART;
       Config : UART_Configuration := Default_UART_Configuration;
@@ -35,18 +47,6 @@ package body Console is
           Id     => RP2040_SVD.Interrupts.UART0_Interrupt,
           Prio   => RP_Interrupts.Interrupt_Priority'First);
    end Configure;
-
-   procedure Interrupt is
-      Data   : HAL.UART.UART_Data_8b (1 .. 1);
-      Status : HAL.UART.UART_Status;
-      Ch     : Character;
-   begin
-      if not Character_Buffers.Is_Full (Buffer) then
-         UART.Receive (Data, Status, Timeout => 0);
-         Ch := Character'Val (Natural (Data (1)));
-         Character_Buffers.Append (Buffer, Ch);
-      end if;
-   end Interrupt;
 
    procedure Get
       (Ch : out Character)

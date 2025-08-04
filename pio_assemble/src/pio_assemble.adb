@@ -12,8 +12,8 @@ with Pico;
 
 procedure Pio_assemble is
    Blink_Program : constant RP.PIO.Program :=
-      (Encode (PULL'       (Block => True, others => <>)),
-       Encode (SHIFT_OUT'  (Destination => PINS, Bit_Count => 1, others => <>)));
+      (Encode (PULL'(Block => True, others => <>)),
+       Encode (SHIFT_OUT'(Destination => PINS, Bit_Count => 1, others => <>)));
    Program_Offset : constant PIO_Address := 0;
    SM             : constant PIO_SM := 0;
    Config         : PIO_SM_Config := Default_SM_Config;

@@ -1,17 +1,18 @@
 name = "feather_rp2040_blink"
-description = "Blink example with a custom BSP"
-version = "0.7.0"
+description = ""
+version = "0.1.0-dev"
 
 authors = ["Jeremy Grosser"]
 maintainers = ["Jeremy Grosser <jeremy@synack.me>"]
 maintainers-logins = ["JeremyGrosser"]
+licenses = "BSD-3-Clause"
+website = ""
+tags = []
 
 executables = ["feather_rp2040_blink"]
 
 [[depends-on]]
-feather_rp2040_bsp = "^1"
+feather_rp2040_bsp = "^2.5.0"
 
 [[pins]]
 feather_rp2040_bsp = { path='../feather_rp2040_bsp' }
-[[pins]]  # Added by alr
-rp2040_hal = { url='https://github.com/JeremyGrosser/rp2040_hal' }   # Added by alr

@@ -9,7 +9,7 @@
 --
 --  This example produces no output.
 --
-with RP.Device;   use RP.Device;
+pragma Style_Checks ("M120");
 with RP.GPIO;     use RP.GPIO;
 with RP.ADC;      use RP.ADC;
 with RP.DMA;      use RP.DMA;

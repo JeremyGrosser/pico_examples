@@ -12,4 +12,4 @@ tags = []
 executables = ["i2c_target"]
 
 [[depends-on]]
-pico_bsp = "^2.0.0"
+pico_bsp = "^2"

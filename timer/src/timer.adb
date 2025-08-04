@@ -3,19 +3,20 @@
 --
 --  SPDX-License-Identifier: BSD-3-Clause
 --
-with HAL.GPIO;   use HAL.GPIO;
-with RP.Device;  use RP.Device;
-with RP.GPIO;    use RP.GPIO;
-with RP.Timer;   use RP.Timer;
+with RP.GPIO;
+with RP.Timer.Interrupts;
+with RP.Timer;
 with RP.Clock;
 with Pico;
 
 procedure Timer is
+   use type RP.Timer.Time;
+   Timer : RP.Timer.Interrupts.Delays;
 begin
    RP.Clock.Initialize (Pico.XOSC_Frequency);
    RP.GPIO.Enable;
 
-   Pico.LED.Configure (Output);
+   Pico.LED.Configure (RP.GPIO.Output);
    Pico.LED.Set;
 
    Timer.Enable;
@@ -30,6 +31,6 @@ begin
       Timer.Delay_Seconds (1);
 
       Pico.LED.Toggle;
-      Timer.Delay_Until (Clock + Ticks_Per_Second);
+      Timer.Delay_Until (RP.Timer.Clock + RP.Timer.Ticks_Per_Second);
    end loop;
 end Timer;

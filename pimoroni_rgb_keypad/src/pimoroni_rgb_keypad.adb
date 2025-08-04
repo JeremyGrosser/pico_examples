@@ -4,7 +4,6 @@
 --  SPDX-License-Identifier: BSD-3-Clause
 --
 with HAL;        use HAL;
-with HAL.GPIO;   use HAL.GPIO;
 with RP.GPIO;    use RP.GPIO;
 with RP.Clock;
 with Pico;

@@ -12,4 +12,5 @@ tags = []
 executables = ["uart_interrupt"]
 
 [[depends-on]]
-pico_bsp = "^2.0.0"
+pico_bsp = "^2"
+chests = "~0.1.1"

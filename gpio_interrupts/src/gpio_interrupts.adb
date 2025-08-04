@@ -15,8 +15,8 @@ begin
    RP.Clock.Initialize (Pico.XOSC_Frequency);
    RP.GPIO.Enable;
 
-   --  GP9 is connected to a normally open button that connects to GND when pressed
-   --  debouncing is an exercise left to the reader
+   --  GP9 is connected to a normally open button that connects to GND when
+   --  pressed debouncing is an exercise left to the reader
    Pico.GP9.Configure (Input, Pull_Up);
 
    RP.GPIO.Interrupts.Attach_Handler (Pico.GP9, Handlers.Toggle_LED'Access);
