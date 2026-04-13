@@ -12,4 +12,16 @@ tags = []
 executables = ["usb_echo"]
 
 [[depends-on]]
-pico_bsp = "^2.0.0"
+pico_bsp = "^3"
+
+[[pins]]
+pico_bsp = { path='../../pico_bsp' }
+
+[[pins]]
+rp2040_hal = { path='../../rp2040_hal' }
+
+[[depends-on]]
+embedded_rp2040 = "^15.2.0"
+
+[build-profiles]
+"*" = "development"

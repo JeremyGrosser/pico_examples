@@ -5,8 +5,6 @@
 --
 pragma Style_Checks ("M120");
 with RP.Device;
-with RP.Clock;
-with Pico;
 
 with USB.Device.Serial;
 with USB.Device;
@@ -28,8 +26,6 @@ procedure Usb_echo is
    Message    : String (1 .. Max_Packet_Size);
    Length     : HAL.UInt32;
 begin
-   RP.Clock.Initialize (Pico.XOSC_Frequency);
-
    if not USB_Stack.Register_Class (USB_Serial'Unchecked_Access) then
       raise Fatal_Error with "Failed to register USB Serial device class";
    end if;
