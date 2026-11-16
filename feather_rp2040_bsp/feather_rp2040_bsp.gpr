@@ -1,12 +1,6 @@
 with "config/feather_rp2040_bsp_config.gpr";
-with "rp2040_hal.gpr";
 
 project Feather_Rp2040_Bsp is
-
-   Linker_Switches := RP2040_HAL.Linker_Switches;
-
-   for Target use "arm-eabi";
-   for Runtime ("Ada") use RP2040_HAL'Runtime ("Ada");
 
    for Library_Name use "Feather_Rp2040_Bsp";
    for Library_Version use Project'Library_Name & ".so." & Feather_Rp2040_Bsp_Config.Crate_Version;

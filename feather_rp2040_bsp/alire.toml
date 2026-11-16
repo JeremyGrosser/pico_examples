@@ -1,6 +1,6 @@
 name = "feather_rp2040_bsp"
 description = "Board support package for the Adafruit Feather RP2040"
-version = "2.5.0"
+version = "3.0.0-dev"
 
 authors = ["Jeremy Grosser"]
 maintainers = ["Jeremy Grosser <jeremy@synack.me>"]
@@ -8,7 +8,7 @@ maintainers-logins = ["JeremyGrosser"]
 tags = ["embedded", "nostd", "adafruit", "feather", "rp2040", "bsp"]
 
 [[depends-on]]
-rp2040_hal = "^2"
+rp2040_hal = "^3"
 
-[configuration.values]
-rp2040_hal.Flash_Chip = "generic_qspi"
+[[pins]]
+rp2040_hal = { url = "https://github.com/JeremyGrosser/rp2040_hal", branch = "3.x" }

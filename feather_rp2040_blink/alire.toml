@@ -12,7 +12,12 @@ tags = []
 executables = ["feather_rp2040_blink"]
 
 [[depends-on]]
-feather_rp2040_bsp = "^2.5.0"
+feather_rp2040_bsp = "^3.0.0-dev"
+embedded_rp2040 = ">=15"
 
 [[pins]]
 feather_rp2040_bsp = { path='../feather_rp2040_bsp' }
+rp2040_hal = { url = "https://github.com/JeremyGrosser/rp2040_hal", branch = "3.x" }
+
+[configuration.values]
+embedded_rp2040.Board = "adafruit_feather_rp2040"

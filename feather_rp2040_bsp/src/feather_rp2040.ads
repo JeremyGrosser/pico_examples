@@ -7,7 +7,6 @@ with RP.GPIO; use RP.GPIO;
 with RP.PIO.WS2812;
 with RP.I2C_Master;
 with RP.Device;
-with RP.Clock;
 with RP.UART;
 with RP.SPI;
 
@@ -39,14 +38,17 @@ package Feather_RP2040 is
    Neopixel_Pin : aliased GPIO_Point := (Pin => 16);
    Neopixel     : aliased RP.PIO.WS2812.Strip
       (Pin => Neopixel_Pin'Access,
-       PIO => RP.Device.PIO_0'Access,
+       PIO => 0,
        SM  => 0,
        Number_Of_LEDs => 1);
 
-   XOSC_Frequency     : RP.Clock.XOSC_Hertz  := 12_000_000;
-   XOSC_Startup_Delay : RP.Clock.XOSC_Cycles := 768_000;
-   --  Some boards need to wait a bit longer for the crystal oscillator to
-   --  stabilize. This value changes the delay from the default 1ms to 64ms.
+   --  The crystal oscillator and flash chip are configured by the Ada
+   --  runtime. Applications using this board should add the following to
+   --  their alire.toml, replacing embedded_rp2040 with the name of the
+   --  runtime crate in use:
+   --
+   --  [configuration.values]
+   --  embedded_rp2040.Board = "adafruit_feather_rp2040"
 
    LED  : GPIO_Point renames D13;
    SPI  : RP.SPI.SPI_Port renames RP.Device.SPI_0;
