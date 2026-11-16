@@ -5,10 +5,9 @@
 --
 pragma Style_Checks ("M120");
 with HAL.UART;   use HAL.UART;
-with RP.Device;  use RP.Device;
+with RP.Device;
 with RP.GPIO;    use RP.GPIO;
 with RP.UART;
-with RP.Clock;
 with Pico;
 
 procedure Uart_echo is
@@ -60,10 +59,6 @@ procedure Uart_echo is
       end loop;
    end Echo;
 begin
-   RP.Clock.Initialize (Pico.XOSC_Frequency);
-   RP.Clock.Enable (RP.Clock.PERI);
-   RP.Device.Timer.Enable;
-   RP.GPIO.Enable;
    Pico.LED.Configure (Output);
    Pico.LED.Set;
 
@@ -79,6 +74,6 @@ begin
           others    => <>));
 
    Send_Hello;
-   UART.Send_Break (RP.Device.Timer'Access, UART.Frame_Time * 2);
+   UART.Send_Break (UART.Frame_Time * 2);
    Echo;
 end Uart_echo;

@@ -4,10 +4,8 @@
 --  SPDX-License-Identifier: BSD-3-Clause
 --
 with HAL; use HAL;
-with RP.Timer; use RP.Timer;
+with Ada.Real_Time; use Ada.Real_Time;
 with RP.PWM; use RP.PWM;
-with RP.Device;
-with RP.Clock;
 with RP.GPIO;
 with Pico;
 
@@ -20,10 +18,8 @@ procedure Pwm is
    Frequency  : constant RP.Hertz := 1_000_000;
    Reload     : constant Period := 1_000;
    Duty_Cycle : Period := Reload / 2; --  start at 50%
-   T          : RP.Timer.Time := RP.Timer.Clock;
+   T          : Time := Clock;
 begin
-   RP.Clock.Initialize (Pico.XOSC_Frequency);
-   RP.Device.Timer.Enable;
    RP.PWM.Initialize;
 
    Pico.LED.Configure
@@ -47,6 +43,6 @@ begin
       Duty_Cycle := (Duty_Cycle + (Reload / 100)) mod Reload;
 
       T := T + Milliseconds (10);
-      RP.Device.Timer.Delay_Until (T);
+      delay until T;
    end loop;
 end Pwm;

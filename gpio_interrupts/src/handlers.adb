@@ -3,16 +3,16 @@
 --
 --  SPDX-License-Identifier: BSD-3-Clause
 --
-with Pico;
-
 package body Handlers is
-   procedure Toggle_LED
-      (Pin     : GPIO_Pin;
-       Trigger : Interrupt_Triggers)
-   is
-      pragma Unreferenced (Pin);
-      pragma Unreferenced (Trigger);
-   begin
-      Pico.LED.Toggle;
-   end Toggle_LED;
+   protected body GPIO is
+      procedure Handler is
+         use RP.GPIO.Interrupt;
+      begin
+         if Triggered (Button.Pin, Falling) then
+            --  Edge triggered interrupts stay pending until acknowledged
+            Acknowledge (Button.Pin, Falling);
+            Pico.LED.Toggle;
+         end if;
+      end Handler;
+   end GPIO;
 end Handlers;

@@ -5,16 +5,12 @@
 --
 with HAL;        use HAL;
 with RP.GPIO;    use RP.GPIO;
-with RP.Clock;
 with Pico;
 with Pico.Pimoroni.RGB_Keypad;
 
 procedure Pimoroni_rgb_keypad is
    Count : UInt8 := 0;
 begin
-   RP.Clock.Initialize (Pico.XOSC_Frequency);
-   RP.GPIO.Enable;
-
    Pico.Pimoroni.RGB_Keypad.Initialize;
 
    Pico.LED.Configure (Output);

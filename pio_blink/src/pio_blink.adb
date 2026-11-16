@@ -5,24 +5,19 @@
 --
 with RP.GPIO; use RP.GPIO;
 with RP.PIO;  use RP.PIO;
-with RP.Device;
-with RP.Clock;
 with Pico;
 with Hello;
 
 procedure Pio_blink is
    Program_Offset : constant PIO_Address := 0;
-   SM             : constant PIO_SM := 0;
-   Config         : PIO_SM_Config := Default_SM_Config;
-   P              : PIO_Device renames RP.Device.PIO_0;
+   SM             : constant SM_Index := 0;
+   Config         : SM_Config := Default_SM_Config;
+   P              : constant RP.PIO.Device := 0;
 begin
-   RP.Clock.Initialize (Pico.XOSC_Frequency);
-   RP.GPIO.Enable;
+   Pico.LED.Configure (Output, Pull_Up, RP.PIO.GPIO_Function (P));
 
-   Pico.LED.Configure (Output, Pull_Up, P.GPIO_Function);
-
-   P.Enable;
-   P.Load (Hello.Hello_Program_Instructions, Program_Offset);
+   Enable (P);
+   Load (P, Hello.Hello_Program_Instructions, Program_Offset);
 
    Set_Out_Pins (Config, Pico.LED.Pin, 1);
    Set_Set_Pins (Config, Pico.LED.Pin, 1);
@@ -31,17 +26,16 @@ begin
       Wrap        => Hello.Hello_Wrap);
    Set_Clock_Frequency (Config, 50_000_000);
 
-   P.SM_Initialize (SM,
+   SM_Initialize (P, SM,
       Initial_PC => Program_Offset,
       Config     => Config);
-   P.Set_Pin_Direction (SM, Pico.LED.Pin, Output);
-   P.Set_Enabled (SM, True);
+   Set_Pin_Direction (P, SM, Pico.LED.Pin, Output);
+   Set_Enabled (P, SM, True);
 
-   RP.Device.Timer.Enable;
    loop
-      P.Put (SM, 1);
-      RP.Device.Timer.Delay_Milliseconds (100);
-      P.Put (SM, 0);
-      RP.Device.Timer.Delay_Milliseconds (100);
+      Put (P, SM, 1);
+      delay 0.1;
+      Put (P, SM, 0);
+      delay 0.1;
    end loop;
 end Pio_blink;

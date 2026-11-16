@@ -5,25 +5,23 @@
 --
 pragma Style_Checks ("M120");
 with RP.GPIO; use RP.GPIO;
-with RP.Clock;
 with Pico.Pimoroni.Audio_Pack;
 with RP.PIO.Audio_I2S;
 with Pico;
 
 with HAL.Audio;
 with Synth;
+with Voices;
 
 procedure Pimoroni_audio_pack is
    Line_Out  : RP.PIO.Audio_I2S.I2S_Device renames Pico.Pimoroni.Audio_Pack.I2S;
    Mute      : RP.GPIO.GPIO_Point renames Pico.Pimoroni.Audio_Pack.MUTE;
 
    Buffer    : HAL.Audio.Audio_Buffer (1 .. Line_Out.Buffer_Size);
-   Sine      : Synth.Oscillator (Channels => Line_Out.Channels);
+   Sine      : Synth.Oscillator renames Voices.Sine;
    Frequency : Positive := 10;
    T         : Natural := 0;
 begin
-   RP.Clock.Initialize (Pico.XOSC_Frequency);
-
    Pico.LED.Configure (Output);
    Pico.LED.Clear;
 

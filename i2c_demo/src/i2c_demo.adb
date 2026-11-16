@@ -1,5 +1,4 @@
 with RP.GPIO; use RP.GPIO;
-with RP.Clock;
 with RP.Device;
 
 with RP.I2C_Master;
@@ -9,8 +8,8 @@ with HAL.I2C; use HAL.I2C;
 with Ada.Text_IO; use Ada.Text_IO;
 
 procedure I2C_Demo is
-   SDA    : GPIO_Point := (Pin => 0);
-   SCL    : GPIO_Point := (Pin => 1);
+   SDA    : constant GPIO_Point := (Pin => 0);
+   SCL    : constant GPIO_Point := (Pin => 1);
 
    Addr_HAL : constant HAL.I2C.I2C_Address := 2#11101100#;
 
@@ -40,13 +39,11 @@ procedure I2C_Demo is
       New_Line;
    end Read_Id_HAL;
 begin
-   RP.Clock.Initialize (12_000_000);
    SDA.Configure (Output, Pull_Up, RP.GPIO.I2C, Schmitt => True);
    SCL.Configure (Output, Pull_Up, RP.GPIO.I2C, Schmitt => True);
 
-   RP.Device.Timer.Enable;
    loop
       Read_Id_HAL;
-      RP.Device.Timer.Delay_Milliseconds (100);
+      delay 0.1;
    end loop;
 end I2C_Demo;

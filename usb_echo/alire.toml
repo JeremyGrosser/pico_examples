@@ -15,13 +15,13 @@ executables = ["usb_echo"]
 pico_bsp = "^3"
 
 [[pins]]
-pico_bsp = { path='../../pico_bsp' }
+pico_bsp = { url = "https://github.com/JeremyGrosser/pico_bsp", branch = "3.x" }
 
 [[pins]]
-rp2040_hal = { path='../../rp2040_hal' }
+rp2040_hal = { url = "https://github.com/JeremyGrosser/rp2040_hal", branch = "3.x" }
 
 [[depends-on]]
-embedded_rp2040 = "^15.2.0"
+embedded_rp2040 = ">=15"
 
 [build-profiles]
 "*" = "development"

@@ -8,8 +8,6 @@ with Ada.Text_IO;
 with HAL.SPI;
 
 with RP.SPI; use RP.SPI;
-with RP.Device;
-with RP.Clock;
 with RP.GPIO;
 with Pico;
 
@@ -18,8 +16,6 @@ with Tests;
 
 procedure Spi_loopback is
 begin
-   RP.Clock.Initialize (Pico.XOSC_Frequency);
-   RP.Device.Timer.Enable;
    Pico.LED.Configure (RP.GPIO.Output);
 
    Board.Initialize;
@@ -124,7 +120,7 @@ begin
 
    Ada.Text_IO.Put_Line ("ALL TESTS PASS");
    loop
-      RP.Device.Timer.Delay_Milliseconds (100);
+      delay 0.1;
       Pico.LED.Toggle;
    end loop;
 end Spi_loopback;

@@ -162,10 +162,10 @@ package body Tests is
        Slave_Config  : SPI_Configuration)
    is
       DMA_Config : constant RP.DMA.DMA_Configuration :=
-         (Increment_Read => True,
-          Trigger        => RP.DMA.SPI0_TX,
-          Data_Size      => RP.DMA.Transfer_16,
-          others         => <>);
+         (Read_Address => RP.DMA.Increment,
+          Trigger      => RP.DMA.SPI0_TX,
+          Data_Size    => RP.DMA.Transfer_16,
+          others       => <>);
       TX_Channel : constant RP.DMA.DMA_Channel_Id := RP.DMA.DMA_Channel_Id'First;
       A : SPI_Data_16b (1 .. 8) := (1, 2, 3, 4, 5, 6, 7, 8);
       B : SPI_Data_16b (1 .. 8);

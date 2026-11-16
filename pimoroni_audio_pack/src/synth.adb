@@ -3,7 +3,7 @@
 --
 --  SPDX-License-Identifier: BSD-3-Clause
 --
-with RP.ROM.Floating_Point;
+with Ada.Numerics.Elementary_Functions;
 
 package body Synth is
 
@@ -11,9 +11,7 @@ package body Synth is
       (This      : in out Oscillator;
        Amplitude : Float := 1.0)
    is
-      --  Wrap fsin to convert to and from C_float
-      function Sin (F : Float) return Float is
-         (RP.ROM.Floating_Point.fsin (F));
+      use Ada.Numerics.Elementary_Functions;
 
       Pi        : constant := 3.14159;  --  probably enough digits
       W         : constant := 2.0 * Pi; --  angular velocity

@@ -8,5 +8,5 @@ with LED_Control;
 procedure Multicore is
 begin
    LED_Control.Initialize;
-   LED_Control.Start;
+   LED_Control.Run;
 end Multicore;

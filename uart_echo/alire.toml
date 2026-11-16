@@ -12,4 +12,9 @@ tags = []
 executables = ["uart_echo"]
 
 [[depends-on]]
-pico_bsp = "^2.0.0"
+pico_bsp = "^3"
+embedded_rp2040 = ">=15"
+
+[[pins]]
+pico_bsp = { url = "https://github.com/JeremyGrosser/pico_bsp", branch = "3.x" }
+rp2040_hal = { url = "https://github.com/JeremyGrosser/rp2040_hal", branch = "3.x" }

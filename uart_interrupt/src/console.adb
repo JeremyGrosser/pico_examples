@@ -1,6 +1,6 @@
-with RP2040_SVD.Interrupts;
-with RP2040_SVD.UART;
-with RP_Interrupts;
+with Ada.Interrupts.Names;
+with System;
+with RP.Device;
 with RP.UART;
 with HAL.UART;
 with HAL;
@@ -12,21 +12,58 @@ package body Console is
    package Character_Buffers is new Chests.Ring_Buffers
       (Element_Type => Character,
        Capacity     => 32);
-   Buffer : Character_Buffers.Ring_Buffer;
 
-   UART : aliased RP.UART.UART_Port (0, RP2040_SVD.UART.UART0_Periph'Access);
+   UART : RP.UART.UART_Port renames RP.Device.UART_0;
 
-   procedure Interrupt is
-      Data   : HAL.UART.UART_Data_8b (1 .. 1);
-      Status : HAL.UART.UART_Status;
-      Ch     : Character;
-   begin
-      if not Character_Buffers.Is_Full (Buffer) then
+   --  The runtime attaches Interrupt to the UART0 interrupt and enables it
+   --  during elaboration. Get blocks the calling task until the interrupt
+   --  handler has buffered a character.
+   protected Receiver
+      with Interrupt_Priority => System.Interrupt_Priority'Last
+   is
+      entry Get
+         (Ch : out Character);
+      procedure Clear;
+   private
+      procedure Interrupt
+         with Attach_Handler => Ada.Interrupts.Names.UART0_Interrupt_CPU_1;
+
+      Buffer    : Character_Buffers.Ring_Buffer;
+      Available : Boolean := False;
+   end Receiver;
+
+   protected body Receiver is
+      entry Get
+         (Ch : out Character)
+         when Available
+      is
+         use Character_Buffers;
+      begin
+         Ch := First_Element (Buffer);
+         Delete_First (Buffer);
+         Available := not Is_Empty (Buffer);
+      end Get;
+
+      procedure Clear is
+      begin
+         Character_Buffers.Clear (Buffer);
+         Available := False;
+      end Clear;
+
+      procedure Interrupt is
+         Data   : HAL.UART.UART_Data_8b (1 .. 1);
+         Status : HAL.UART.UART_Status;
+      begin
+         --  Reading the data register clears the receive interrupt. If the
+         --  buffer is full, the character is dropped.
          UART.Receive (Data, Status, Timeout => 0);
-         Ch := Character'Val (Natural (Data (1)));
-         Character_Buffers.Append (Buffer, Ch);
-      end if;
-   end Interrupt;
+         if not Character_Buffers.Is_Full (Buffer) then
+            Character_Buffers.Append
+               (Buffer, Character'Val (Natural (Data (1))));
+            Available := True;
+         end if;
+      end Interrupt;
+   end Receiver;
 
    procedure Configure is
       use RP.UART;
@@ -37,28 +74,16 @@ package body Console is
       --  available, rather than waiting for a FIFO level.
       Config.Baud := 9600;
 
+      Receiver.Clear;
       UART.Configure (Config);
       UART.Enable_IRQ (Receive);
-
-      Character_Buffers.Clear (Buffer);
-
-      RP_Interrupts.Attach_Handler
-         (Handler => Interrupt'Access,
-          Id     => RP2040_SVD.Interrupts.UART0_Interrupt,
-          Prio   => RP_Interrupts.Interrupt_Priority'First);
    end Configure;
 
    procedure Get
       (Ch : out Character)
    is
-      use Character_Buffers;
    begin
-      while Is_Empty (Buffer) loop
-         null;
-      end loop;
-
-      Ch := First_Element (Buffer);
-      Delete_First (Buffer);
+      Receiver.Get (Ch);
    end Get;
 
    procedure Put

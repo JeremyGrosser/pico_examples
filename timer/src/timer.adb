@@ -3,34 +3,36 @@
 --
 --  SPDX-License-Identifier: BSD-3-Clause
 --
-with RP.GPIO;
-with RP.Timer.Interrupts;
+--  Delays are provided by the Ada runtime. The delay statements suspend the
+--  calling task until the runtime's timer interrupt fires, so other tasks can
+--  run and the CPU can sleep in the meantime.
+--
+with Ada.Real_Time; use Ada.Real_Time;
 with RP.Timer;
-with RP.Clock;
+with RP.GPIO;
 with Pico;
 
 procedure Timer is
    use type RP.Timer.Time;
-   Timer : RP.Timer.Interrupts.Delays;
+   Next : Time;
 begin
-   RP.Clock.Initialize (Pico.XOSC_Frequency);
-   RP.GPIO.Enable;
-
    Pico.LED.Configure (RP.GPIO.Output);
    Pico.LED.Set;
 
-   Timer.Enable;
    loop
+      --  Relative delay, in seconds
       Pico.LED.Toggle;
-      Timer.Delay_Microseconds (1_000_000);
+      delay 1.0;
 
+      --  Absolute delay using the monotonic Ada.Real_Time clock
       Pico.LED.Toggle;
-      Timer.Delay_Milliseconds (1_000);
+      Next := Clock + Milliseconds (1_000);
+      delay until Next;
 
+      --  RP.Timer reads the hardware timer directly (microseconds since
+      --  power on) and can busy wait where a delay statement is not allowed,
+      --  such as an interrupt handler.
       Pico.LED.Toggle;
-      Timer.Delay_Seconds (1);
-
-      Pico.LED.Toggle;
-      Timer.Delay_Until (RP.Timer.Clock + RP.Timer.Ticks_Per_Second);
+      RP.Timer.Busy_Wait_Until (RP.Timer.Clock + RP.Timer.Ticks_Per_Second);
    end loop;
 end Timer;

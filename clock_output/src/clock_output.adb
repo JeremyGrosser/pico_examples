@@ -11,16 +11,15 @@ with Pico;
 
 procedure Clock_Output is
 begin
-   RP.Clock.Initialize (Pico.XOSC_Frequency);
    Pico.LED.Configure (Output);
    Pico.LED.Set;
 
-   Pico.GP21.Configure (Output, Pull_Up, RP.GPIO.CLOCK, Slew_Fast => True);
+   Pico.GP21.Configure (Output, Pull_Up, RP.GPIO.CLK, Slew_Fast => True);
    RP.Clock.Set_Source (GPOUT0, SYS);
    RP.Clock.Set_Divider (GPOUT0, 12.5);
    RP.Clock.Enable (GPOUT0);
 
    loop
-      null;
+      delay 1.0;
    end loop;
 end Clock_Output;

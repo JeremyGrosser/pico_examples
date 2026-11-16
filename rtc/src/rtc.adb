@@ -4,9 +4,8 @@
 --  SPDX-License-Identifier: BSD-3-Clause
 --
 with HAL.Real_Time_Clock; use HAL.Real_Time_Clock;
-with RP.Timer; use RP.Timer;
+with Ada.Real_Time;
 with RP.Device;
-with RP.Clock;
 with RP.GPIO;
 with Pico;
 
@@ -26,11 +25,9 @@ procedure Rtc is
        Min  => 59,
        Sec  => 50);
 
-   T : RP.Timer.Time;
+   use type Ada.Real_Time.Time;
+   T : Ada.Real_Time.Time;
 begin
-   RP.Clock.Initialize (Pico.XOSC_Frequency);
-   RP.Device.Timer.Enable;
-
    Pico.LED.Configure (RP.GPIO.Output);
 
    RP.Device.RTC.Configure;
@@ -38,8 +35,8 @@ begin
 
    --  Wait a couple seconds after setting the time to ensure it reads back
    --  correctly.
-   T := RP.Timer.Clock + Ticks_Per_Second * 2;
-   RP.Device.Timer.Delay_Until (T);
+   T := Ada.Real_Time.Clock + Ada.Real_Time.Seconds (2);
+   delay until T;
 
    loop
       RP.Device.RTC.Get (Time, Date);
@@ -52,7 +49,7 @@ begin
 
       Pico.LED.Toggle;
 
-      T := T + Ticks_Per_Second;
-      RP.Device.Timer.Delay_Until (T);
+      T := T + Ada.Real_Time.Seconds (1);
+      delay until T;
    end loop;
 end Rtc;

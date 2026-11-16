@@ -1,10 +1,10 @@
 with "config/clock_output_config.gpr";
-with "pico_bsp.gpr";
+with "runtime_build.gpr";
 
 project Clock_Output is
 
-   for Target use "arm-eabi";
-   for Runtime ("Ada") use "light-cortex-m0p";
+   for Target use Runtime_Build'Target;
+   for Runtime ("Ada") use Runtime_Build'Runtime ("Ada");
 
    for Source_Dirs use ("src/", "config/");
    for Object_Dir use "obj/" & Clock_Output_Config.Build_Profile;
@@ -25,7 +25,7 @@ project Clock_Output is
    end Install;
 
    package Linker is
-      for Switches ("Ada") use Pico_BSP.Linker_Switches;
+      for Switches ("Ada") use Runtime_Build.Linker_Switches;
    end Linker;
 
 end Clock_Output;
