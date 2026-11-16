@@ -3,14 +3,13 @@
 --
 --  SPDX-License-Identifier: BSD-3-Clause
 --
-with RP.GPIO;
-with Pico;
+with Ada.Real_Time;
+with Blinker;
+pragma Unreferenced (Blinker);
 
 procedure Main is
 begin
-   Pico.LED.Configure (RP.GPIO.Output);
-   loop
-      Pico.LED.Toggle;
-      delay 0.1;
-   end loop;
+   --  The Blinker.Blink task does all the work. The environment task has
+   --  nothing left to do, but must not return.
+   delay until Ada.Real_Time.Time_Last;
 end Main;

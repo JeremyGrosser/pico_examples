@@ -1,0 +1,20 @@
+name = "ravenscar_blink"
+description = "Blink an LED from a task"
+version = "0.1.0-dev"
+
+authors = ["Jeremy Grosser"]
+maintainers = ["Jeremy Grosser <jeremy@synack.me>"]
+maintainers-logins = ["JeremyGrosser"]
+licenses = "BSD-3-Clause"
+website = ""
+tags = []
+
+executables = ["main"]
+
+[[depends-on]]
+pico_bsp = "^3"
+light_tasking_rp2040 = ">=15"
+
+[[pins]]
+pico_bsp = { url = "https://github.com/JeremyGrosser/pico_bsp", branch = "3.x" }
+rp2040_hal = { url = "https://github.com/JeremyGrosser/rp2040_hal", branch = "3.x" }

@@ -1,5 +1,8 @@
-The ravenscar examples are broken with the current pico_bsp. The pico_bsp
-project adds a linker script and some startup files to the build which conflict
-with the ravenscar runtime. Making this conditional will require some changes
-to alire that have not been released yet. Until then, if you need to use
-ravenscar, you will need to switch to the `zfp_split` branch of pico_bsp.
+# ravenscar_blink
+
+Blinks the LED from a task using the `light_tasking_rp2040` runtime from
+[community-bb-runtimes](https://github.com/damaki/community-bb-runtimes).
+
+rp2040_hal 3.x requires a tasking runtime, so every example in this repository
+can use tasks, protected objects, and `delay` statements. This one shows the
+minimum needed to declare a task.
