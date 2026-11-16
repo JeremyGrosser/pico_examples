@@ -1,33 +1,50 @@
 # i2c_demo
 
+Reads the chip ID register of a BME280 or BMP280 sensor connected to I2C0 (SDA on GP0, SCL on GP1) with `RP.I2C_Master` and prints it every 100 ms.
+
 This is an example to jump off from coding a Raspberry Pi Pico using the Ada programming language.
-I've condensed this for my own future reading from the [more complete guide here](https://pico-doc.synack.me/), and
-added configurations for [VSCode](https://code.visualstudio.com/download) and
+It is condensed from the [more complete guide here](https://pico-doc.synack.me/), and includes
+configurations for [VSCode](https://code.visualstudio.com/download) and
 [Vimspector](https://github.com/puremourning/vimspector) to connect to gdb using the debug interface; that's what
 the 3 wires are for which you'll find across the top of the short side of a Pico, on the opposite end from the usb connector.
 
 ## Pre-requisites
 
-You will need a raspberry pi pico, and preferably also something to program it with using the debug interface. Otherwise,
-you will not be able to step through the code, and will have to resort to print-statement-debugging. I'm told there are
-professional debug adapters like [Segger J-Link](https://www.segger.com/products/debug-probes/j-link/), but
-a raspberry pi running OpenOCD works fine too. [Instructions for setting that up are in this video](https://www.youtube.com/watch?v=g3sGKoLafew).
+You will need a Raspberry Pi Pico, and preferably also something to program it with using the debug interface. Otherwise,
+you will not be able to step through the code, and this example's output will not be visible. There are professional debug adapters like
+[Segger J-Link](https://www.segger.com/products/debug-probes/j-link/), but the
+[Raspberry Pi Debug Probe](https://www.raspberrypi.com/documentation/microcontrollers/debug-probe.html) or
+a Raspberry Pi running OpenOCD works fine too. [Instructions for setting that up are in this video](https://www.youtube.com/watch?v=g3sGKoLafew).
 
-To build, you need Alire installed. Assuming you are running Linux on x86_64, the following commands should work.
+To build, you need [Alire](https://alire.ada.dev/) installed. Assuming you are running Linux on x86_64, the following commands should work.
 
 ```
-curl -L -O https://github.com/alire-project/alire/releases/download/v2.0.2/alr-2.0.2-bin-x86_64-linux.zip
-unzip alr-2.0.2-bin-x86_64-linux.zip
+curl -L -O https://github.com/alire-project/alire/releases/download/v2.1.0/alr-2.1.0-bin-x86_64-linux.zip
+unzip alr-2.1.0-bin-x86_64-linux.zip
 sudo cp bin/alr /usr/local/bin
 ```
 
 Next, you need [picotool](https://github.com/raspberrypi/picotool) installed and in PATH.
+
+## Dependencies
+
+This project uses rp2040_hal 3.x and pico_bsp 3.x with the `embedded_rp2040` Ada runtime from
+[community-bb-runtimes](https://github.com/damaki/community-bb-runtimes). The runtime provides the startup code,
+linker script, clock configuration, `delay` statements, and interrupt handling. Alire downloads all of these the first
+time you build.
+
+Until version 3.0.0 of rp2040_hal and pico_bsp is released to the Alire index, `alire.toml` pins both crates to the
+`3.x` branch of their git repositories.
 
 ## Building / running
 
 To build, do `make build`. To deploy (this is the default `make` target) as well, you can do `make deploy`.
 You will then need to hold the bootsel button on the pico while you plug in the USB cable and press any key to continue.
 You can release the bootsel while Loading into Flash. Once it is deployed, you can replug the USB cable to start the program.
+
+This example prints with `Ada.Text_IO`, which the runtime implements using semihosting. The output appears in the
+OpenOCD console, and the program will stop with a HardFault at the first `Put_Line` if no debugger is attached, so run
+it from gdb as described below rather than deploying it over USB.
 
 ## Debugging
 
@@ -41,7 +58,7 @@ If using vimspector or VSCode, you can just launch. If you need to run gdb direc
 
 ```
 eval $(alr printenv)
-arm-eabi-gdb bin/hello_pico
+arm-eabi-gdb bin/i2c_demo
 target extended-remote localhost:3333
 monitor arm semihosting enable
 load
