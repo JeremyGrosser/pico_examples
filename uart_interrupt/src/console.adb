@@ -1,3 +1,8 @@
+--
+--  Copyright (C) 2022-2026 Jeremy Grosser <jeremy@synack.me>
+--
+--  SPDX-License-Identifier: BSD-3-Clause
+--
 with Ada.Interrupts.Names;
 with System;
 with RP.Device;
