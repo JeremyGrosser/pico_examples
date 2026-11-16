@@ -12,4 +12,16 @@ tags = []
 executables = ["usb_echo_interrupt"]
 
 [[depends-on]]
-pico_bsp = "^2.0.0"
+pico_bsp = "^3"
+
+[[pins]]
+pico_bsp = { url = "https://github.com/JeremyGrosser/pico_bsp", branch = "3.x" }
+
+[[pins]]
+rp2040_hal = { url = "https://github.com/JeremyGrosser/rp2040_hal", branch = "3.x" }
+
+[[depends-on]]
+embedded_rp2040 = ">=15"
+
+[build-profiles]
+rp2040_hal = "development"

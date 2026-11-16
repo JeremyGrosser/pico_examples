@@ -4,11 +4,7 @@
 --  SPDX-License-Identifier: BSD-3-Clause
 --
 pragma Style_Checks ("M120");
-with RP_Interrupts;
-with Cortex_M.NVIC;
-
-with RP2040_SVD.Interrupts;
-
+with Ada.Interrupts.Names;
 with RP.Device;
 
 with USB.Device;
@@ -18,19 +14,24 @@ package body USB_Int is
 
    Fatal_Error : exception;
 
-   Int_ID : constant RP_Interrupts.Interrupt_ID :=
-     RP2040_SVD.Interrupts.USBCTRL_Interrupt;
-
    USB_Stack : USB.Device.USB_Device_Stack (Max_Classes => 1);
 
-   procedure USB_Int_Handler is
+   protected Interrupts is
+      procedure USB_Int_Handler
+         with Attach_Handler => Ada.Interrupts.Names.USBCTRL_Interrupt_CPU_1;
+   end Interrupts;
+
+   protected body Interrupts is
+      procedure USB_Int_Handler is
+      begin
+         USB_Stack.Poll;
+      end USB_Int_Handler;
+   end Interrupts;
+
+   procedure Poll is
    begin
-
-      --  Interrupt based USB device only requiers to call the stack Poll
-      --  procedure for every interrupt of the RP USB device controller.
       USB_Stack.Poll;
-
-   end USB_Int_Handler;
+   end Poll;
 
    procedure Initialize is
       use type USB.Device.Init_Result;
@@ -52,16 +53,6 @@ package body USB_Int is
       end if;
 
       USB_Stack.Start;
-
-      --  Attach a handler to the RP USB device controller interrupt
-      RP_Interrupts.Attach_Handler
-        (USB_Int_Handler'Access,
-         Int_ID,
-         RP_Interrupts.Interrupt_Priority'First);
-
-      --  Enable the RP USB device controller interrupt
-      Cortex_M.NVIC.Enable_Interrupt (Int_ID);
-
    end Initialize;
 
 end USB_Int;

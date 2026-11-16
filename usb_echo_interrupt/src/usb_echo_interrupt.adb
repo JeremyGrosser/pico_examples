@@ -4,26 +4,24 @@
 --  SPDX-License-Identifier: BSD-3-Clause
 --
 with RP.Device;
-with RP.Clock;
-with Pico;
-
 with USB.Device.Serial;
 with USB.Device;
 with USB;
 with HAL; use HAL;
 
 with USB_Int;
+with Ada.Text_IO;
+with RP.Clock;
 
 procedure Usb_echo_interrupt is
    Message    : String (1 .. USB_Int.Max_Packet_Size);
    Length     : HAL.UInt32;
 begin
-   RP.Clock.Initialize (Pico.XOSC_Frequency);
-
    --  See usb_int.adb for initialization and interrupt handling setup
    USB_Int.Initialize;
 
    loop
+      USB_Int.Poll;
       if USB_Int.USB_Serial.List_Ctrl_State.DTE_Is_Present then
          USB_Int.USB_Serial.Read (Message, Length);
          if Length > 0 then

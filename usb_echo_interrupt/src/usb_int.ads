@@ -15,4 +15,6 @@ package USB_Int is
 
    procedure Initialize;
 
+   procedure Poll;
+
 end USB_Int;
